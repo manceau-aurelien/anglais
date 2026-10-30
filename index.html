@@ -36,6 +36,16 @@
     </script>
 
     <style>
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+            position: relative;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
@@ -102,7 +112,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 selection:bg-indigo-500 selection:text-white">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 selection:bg-indigo-500 selection:text-white overflow-x-hidden w-full">
 
     <!-- BARRE DE NAVIGATION SUPÉRIEURE -->
     <header class="sticky top-0 z-50 bg-slate-900 border-b border-indigo-950/80 shadow-md">
@@ -159,7 +169,7 @@
     </header>
 
     <!-- CONTENEUR PRINCIPAL -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-6 overflow-x-hidden">
 
         <!-- BANNIÈRE D'ÉTAT DE LA MÉMOIRE ET CONSEIL COGNITIF -->
         
@@ -192,30 +202,30 @@
         <!-- ========================================================== -->
         <!-- VUE NOUVELLE (V3.0) : 🎧 LABO AUDIO INCRÉMENTAL (100% SON) -->
         <!-- ========================================================== -->
-        <section id="view-audio" class="hidden space-y-3">
+        <section id="view-audio" class="hidden space-y-3 w-full max-w-3xl mx-auto overflow-hidden">
             <!-- 1. BARRE DE CONTRÔLE COMPACTE DU MODULE AUDIO (Choix du module, Dots, UK/US) -->
-            <div class="bg-slate-900 text-white p-2.5 sm:p-3 rounded-2xl border border-indigo-950/80 shadow-md flex flex-wrap items-center justify-between gap-2">
-                <!-- Choix du module / palier (On est dedans, pas besoin de défiler en bas) -->
-                <div class="flex items-center gap-2">
+            <div class="bg-slate-900 text-white p-2.5 sm:p-3 rounded-2xl border border-indigo-950/80 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 w-full overflow-hidden">
+                <!-- Choix du module / palier (100% responsive, ne déborde jamais) -->
+                <div class="flex items-center gap-2 w-full sm:w-auto min-w-0">
                     <span class="text-xs font-bold text-indigo-300 flex items-center gap-1 shrink-0">
                         <i class="fa-solid fa-layer-group"></i> Module :
                     </span>
-                    <select id="audio-module-select" onchange="app.selectAudioStage(parseInt(this.value), 0)" class="bg-indigo-950 border border-indigo-500/30 text-white font-bold text-xs rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-400 cursor-pointer">
-                        <option value="1">Palier 1 : Mots Isolés (1 mot)</option>
-                        <option value="2">Palier 2 : Petits Groupes (2-3 mots)</option>
-                        <option value="3">Palier 3 : Premières Phrases (4-6 mots)</option>
-                        <option value="4">Palier 4 : Expressions Courantes (6-8 mots)</option>
-                        <option value="5">Palier 5 : Phrases Fluides (8-10 mots)</option>
-                        <option value="6">Palier 6 : Grandes Phrases (10-14 mots)</option>
+                    <select id="audio-module-select" onchange="app.selectAudioStage(parseInt(this.value), 0)" class="w-full sm:w-auto min-w-0 flex-1 truncate bg-indigo-950 border border-indigo-500/30 text-white font-bold text-xs rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-400 cursor-pointer">
+                        <option value="1">Palier 1 : Mots Isolés</option>
+                        <option value="2">Palier 2 : Petits Groupes</option>
+                        <option value="3">Palier 3 : Premières Phrases</option>
+                        <option value="4">Palier 4 : Phrases Courantes</option>
+                        <option value="5">Palier 5 : Phrases Fluides</option>
+                        <option value="6">Palier 6 : Grandes Phrases</option>
                     </select>
                 </div>
 
                 <!-- Petits points des 6 défis du module + Réglage Voix -->
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center gap-1" id="audio-studio-dots">
+                <div class="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                    <div class="flex items-center gap-1 overflow-x-auto no-scrollbar shrink-0" id="audio-studio-dots">
                         <!-- Points 1 à 6 injectés dynamiquement -->
                     </div>
-                    <div class="flex items-center gap-0.5 bg-black/40 p-0.5 rounded-lg border border-white/10 text-xs">
+                    <div class="flex items-center gap-0.5 bg-black/40 p-0.5 rounded-lg border border-white/10 text-xs shrink-0">
                         <button id="voice-btn-gb" onclick="app.setAudioVoiceAccent('en-GB')" class="px-2 py-0.5 rounded-md font-bold bg-rose-500 text-white text-[11px] transition">
                             🇬🇧 UK
                         </button>
@@ -226,38 +236,37 @@
                 </div>
             </div>
 
-            <!-- 2. STUDIO D'ÉCOUTE COMPACT (Zéro défilement superflu) -->
-            <div id="audio-studio-card" class="bg-white rounded-2xl border border-slate-200 shadow-md p-3.5 sm:p-5 space-y-4">
-                <!-- En-tête titre du défi -->
-                <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
-                    <div class="flex items-center gap-2">
-                        <span id="audio-studio-stage-pill" class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-500 text-white uppercase">
+            <!-- 2. STUDIO D'ÉCOUTE COMPACT (Zéro défilement superflu, zéro décalage latéral) -->
+            <div id="audio-studio-card" class="bg-white rounded-2xl border border-slate-200 shadow-md p-3 sm:p-5 space-y-3.5 w-full overflow-hidden">
+                <!-- En-tête titre du défi (Sur 2 rangées propres sur mobile pour ne jamais déborder) -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-slate-100 pb-2.5 w-full overflow-hidden">
+                    <div class="flex items-center gap-1.5 min-w-0 overflow-hidden">
+                        <span id="audio-studio-stage-pill" class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-500 text-white uppercase shrink-0">
                             Palier 1
                         </span>
-                        <span id="audio-studio-step-pill" class="text-xs font-semibold text-slate-600">
+                        <span id="audio-studio-step-pill" class="text-[11px] sm:text-xs font-semibold text-slate-500 shrink-0">
                             Défi 1 / 6
                         </span>
-                        <h2 id="audio-studio-title" class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate">
+                        <h2 id="audio-studio-title" class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate min-w-0">
                             Mots Isolés
                         </h2>
                     </div>
 
-                    <div class="text-[11px] text-slate-500 flex items-center gap-1.5 shrink-0">
-                        <span id="audio-word-count-badge" class="font-bold text-indigo-600">1 mot</span>
-                        <span>•</span>
+                    <div class="text-[11px] text-slate-500 flex items-center justify-between sm:justify-end gap-2 shrink-0">
+                        <span id="audio-word-count-badge" class="font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">1 mot</span>
                         <span>Écoutes : <span id="audio-listen-counter" class="font-bold text-slate-800">0</span></span>
                     </div>
                 </div>
 
-                <!-- Cœur audio : mini onde + 3 BOUTONS D'ÉCOUTE -->
-                <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-xl p-3 text-white flex flex-col items-center gap-2.5">
+                <!-- Cœur audio : mini onde + 3 BOUTONS D'ÉCOUTE (100% ajustés à l'écran mobile) -->
+                <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-xl p-2.5 sm:p-3 text-white flex flex-col items-center gap-2 w-full overflow-hidden">
                     <!-- Ondes sonores compactes -->
                     <div class="flex items-center justify-between w-full text-[11px] text-indigo-200">
-                        <div class="flex items-center gap-1.5">
-                            <span id="audio-status-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span id="audio-status-label" class="text-[11px]">Prêt à écouter</span>
+                        <div class="flex items-center gap-1.5 min-w-0 truncate">
+                            <span id="audio-status-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                            <span id="audio-status-label" class="text-[11px] truncate">Prêt à écouter</span>
                         </div>
-                        <div id="audio-waveform-bars" class="h-4 flex items-center gap-1">
+                        <div id="audio-waveform-bars" class="h-4 flex items-center gap-1 shrink-0">
                             <div class="eq-bar w-1 bg-rose-400 rounded-full h-2"></div>
                             <div class="eq-bar w-1 bg-indigo-400 rounded-full h-3"></div>
                             <div class="eq-bar w-1 bg-amber-400 rounded-full h-4"></div>
@@ -265,52 +274,52 @@
                         </div>
                     </div>
 
-                    <!-- LES 3 TYPES D'ÉCOUTE (1.0x, 0.7x, Mot par mot) -->
-                    <div class="grid grid-cols-3 gap-1.5 sm:gap-2 w-full">
-                        <button onclick="app.playAudioChallenge(0.96)" class="py-2 px-1 rounded-xl font-bold text-xs sm:text-sm bg-rose-500 hover:bg-rose-400 text-white shadow transition flex items-center justify-center gap-1.5 active:scale-95">
-                            <i class="fa-solid fa-play text-xs"></i>
-                            <span>Normale (1.0x)</span>
+                    <!-- LES 3 TYPES D'ÉCOUTE (Normale, Lente, Mot par mot — 100% ajustés) -->
+                    <div class="grid grid-cols-3 gap-1.5 w-full">
+                        <button type="button" onclick="app.playAudioChallenge(0.96)" class="py-2 px-1 rounded-xl font-bold text-[11px] sm:text-xs bg-rose-500 hover:bg-rose-400 text-white shadow transition flex items-center justify-center gap-1 active:scale-95 truncate">
+                            <i class="fa-solid fa-play text-[10px] shrink-0"></i>
+                            <span class="truncate">Normale</span>
                         </button>
-                        <button onclick="app.playAudioChallenge(0.65)" class="py-2 px-1 rounded-xl font-semibold text-xs sm:text-sm bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/40 transition flex items-center justify-center gap-1.5 active:scale-95">
-                            <span>🐢</span>
-                            <span>Lente (0.7x)</span>
+                        <button type="button" onclick="app.playAudioChallenge(0.65)" class="py-2 px-1 rounded-xl font-semibold text-[11px] sm:text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/40 transition flex items-center justify-center gap-1 active:scale-95 truncate">
+                            <span class="shrink-0 text-xs">🐢</span>
+                            <span class="truncate">Lente</span>
                         </button>
-                        <button onclick="app.playWordByWordAudio()" class="py-2 px-1 rounded-xl font-semibold text-xs sm:text-sm bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 border border-sky-400/40 transition flex items-center justify-center gap-1.5 active:scale-95" title="Détache chaque mot">
-                            <span>🔍</span>
-                            <span>Mot par mot</span>
+                        <button type="button" onclick="app.playWordByWordAudio()" class="py-2 px-1 rounded-xl font-semibold text-[11px] sm:text-xs bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 border border-sky-400/40 transition flex items-center justify-center gap-1 active:scale-95 truncate" title="Détache chaque mot">
+                            <span class="shrink-0 text-xs">🔍</span>
+                            <span class="truncate">Mot par mot</span>
                         </button>
                     </div>
                 </div>
 
                 <!-- ZONE DE CONSTRUCTION / RÉPONSE (Briques à cliquer) -->
-                <div id="audio-interaction-area" class="space-y-3">
+                <div id="audio-interaction-area" class="space-y-3 w-full overflow-hidden">
                     <!-- Injecté dynamiquement par renderAudioStudioChallenge() -->
                 </div>
 
                 <!-- Bouton de Validation Audio -->
-                <div id="audio-action-footer" class="flex items-center justify-end pt-1">
-                    <button onclick="app.checkAudioStudioAnswer()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow transition flex items-center justify-center gap-2 active:scale-95">
+                <div id="audio-action-footer" class="flex items-center justify-end pt-1 w-full">
+                    <button type="button" onclick="app.checkAudioStudioAnswer()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow transition flex items-center justify-center gap-2 active:scale-95">
                         <span>Vérifier mon écoute</span>
                         <i class="fa-solid fa-check"></i>
                     </button>
                 </div>
 
                 <!-- Boîte de Feedback après validation -->
-                <div id="audio-feedback-box" class="hidden rounded-xl p-3 border transition-all text-xs sm:text-sm"></div>
+                <div id="audio-feedback-box" class="hidden rounded-xl p-3 border transition-all text-xs sm:text-sm w-full"></div>
 
                 <!-- Indices partiels (si demandés) -->
-                <div id="audio-hint-partial-box" class="hidden rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-950"></div>
-                <div id="audio-hint-full-box" class="hidden rounded-xl bg-indigo-50 border border-indigo-200 p-3 text-xs text-indigo-950"></div>
+                <div id="audio-hint-partial-box" class="hidden rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-950 w-full"></div>
+                <div id="audio-hint-full-box" class="hidden rounded-xl bg-indigo-50 border border-indigo-200 p-3 text-xs text-indigo-950 w-full"></div>
             </div>
 
             <!-- 3. ACCORDÉON D'EXPLICATION (Le seul défilement vers le bas : lire l'explication si on le souhaite, pas tomber sur d'autres niveaux) -->
-            <details id="audio-explanation-accordion" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden group">
+            <details id="audio-explanation-accordion" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden group w-full">
                 <summary class="px-4 py-3 cursor-pointer list-none flex items-center justify-between text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 select-none transition">
-                    <span class="flex items-center gap-2">
-                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
-                        <span>💡 Voir l'explication et la traduction de la phrase</span>
+                    <span class="flex items-center gap-2 min-w-0 truncate">
+                        <i class="fa-solid fa-lightbulb text-amber-500 shrink-0"></i>
+                        <span class="truncate">💡 Explication & traduction de la phrase</span>
                     </span>
-                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform group-open:rotate-180"></i>
+                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform group-open:rotate-180 shrink-0 ml-1"></i>
                 </summary>
                 <div id="audio-explanation-content" class="p-3.5 sm:p-4 border-t border-slate-100 bg-slate-50/50 space-y-2 text-xs sm:text-sm">
                     <!-- Rempli dynamiquement -->
@@ -2609,7 +2618,10 @@
                 if (stepPill) stepPill.textContent = `Défi ${this.audioStudio.challengeIndex + 1} / ${st.challenges.length}`;
 
                 const titleEl = document.getElementById('audio-studio-title');
-                if (titleEl) titleEl.textContent = st.title.split('—')[1]?.trim() || st.title;
+                if (titleEl) {
+                    const shortTitle = (st.title.split('—')[1]?.trim() || st.title).replace(/\([^)]*\)/g, '').trim();
+                    titleEl.textContent = shortTitle;
+                }
 
                 const countEl = document.getElementById('audio-word-count-badge');
                 if (countEl) countEl.textContent = `${targetWordCount} mot${targetWordCount > 1 ? 's' : ''}`;
