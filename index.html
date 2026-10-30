@@ -105,163 +105,64 @@
 <body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 selection:bg-indigo-500 selection:text-white">
 
     <!-- BARRE DE NAVIGATION SUPÉRIEURE -->
-    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
-            <!-- Logo & Concept -->
-            <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="app.switchTab('parcours')">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-500 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
-                    <i class="fa-solid fa-cubes-stacked text-lg"></i>
+    <header class="sticky top-0 z-50 bg-slate-900 border-b border-indigo-950/80 shadow-md">
+        <!-- Barre Logo & Utilitaires (Ultra-compacte) -->
+        <div class="max-w-7xl mx-auto px-2.5 sm:px-6 py-1 flex items-center justify-between gap-2 border-b border-white/10 text-white text-xs">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="app.switchTab('parcours')">
+                <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-400 flex items-center justify-center text-white shadow font-bold text-xs">
+                    <i class="fa-solid fa-cubes-stacked text-[11px]"></i>
                 </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="font-display font-extrabold text-lg tracking-tight text-slate-900">Lingo<span class="text-indigo-600">Brick</span></span>
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            v3.0 • Audio + Cycle 2
-                        </span>
-                    </div>
-                    <p class="text-[11px] text-slate-500 hidden xl:block">Paliers 1–10, Labo Audio Incrémental & Déclic Francophone</p>
-                </div>
+                <span class="font-display font-extrabold text-xs sm:text-sm tracking-tight text-white">Lingo<span class="text-indigo-400">Brick</span></span>
             </div>
 
-            <!-- Navigation Centrale (5 Grands Onglets) -->
-            <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/70 overflow-x-auto max-w-full">
-                <button id="nav-parcours" onclick="app.switchTab('parcours')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 bg-white text-indigo-600 shadow-sm whitespace-nowrap">
-                    <i class="fa-solid fa-stairs"></i>
-                    <span>Parcours (1–10)</span>
-                </button>
-                <button id="nav-audio" onclick="app.switchTab('audio')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    <i class="fa-solid fa-headphones-simple text-rose-500"></i>
-                    <span>Labo Audio</span>
-                    <span class="hidden md:inline-flex px-1.5 py-0.2 rounded-full text-[10px] bg-rose-100 text-rose-700 font-bold">Nouveau</span>
-                </button>
-                <button id="nav-declic" onclick="app.switchTab('declic')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    <i class="fa-solid fa-lightbulb text-amber-500"></i>
-                    <span>Cours Déclic FR/EN</span>
-                    <span class="hidden md:inline-flex px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">7 fiches</span>
-                </button>
-                <button id="nav-cerveau" onclick="app.switchTab('cerveau')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    <i class="fa-solid fa-brain"></i>
-                    <span>Mémoire SRS</span>
-                    <span id="srs-badge-count" class="px-1.5 py-0.2 rounded-full text-[11px] bg-amber-500 text-white font-bold hidden">0</span>
-                </button>
-                <button id="nav-echafaudage" onclick="app.switchTab('echafaudage')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    <i class="fa-solid fa-diagram-project"></i>
-                    <span class="hidden md:inline">Arbre de</span> <span>Complexité</span>
-                </button>
-            </nav>
-
-            <!-- Indicateurs Cognitifs & Actions Rapides -->
-            <div class="flex items-center gap-2 shrink-0">
-                <button onclick="app.simulateTimeDecay()" title="Simuler +24h pour observer la courbe de l'oubli et déclencher des révisions SRS" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 transition">
-                    <i class="fa-solid fa-forward-fast text-amber-600"></i>
-                    <span>+24h</span>
-                </button>
-
-                <div class="hidden sm:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200/80">
-                    <div class="flex items-center gap-1 text-amber-500 font-bold text-xs sm:text-sm" title="Points d'ancrage cognitif">
-                        <i class="fa-solid fa-bolt"></i>
-                        <span id="header-xp">0</span>
-                    </div>
-                    <span class="text-slate-300">|</span>
-                    <div class="flex items-center gap-1 text-emerald-600 font-bold text-xs sm:text-sm" title="Taux de rétention globale">
-                        <i class="fa-solid fa-shield-heart"></i>
-                        <span id="header-retention">100%</span>
-                    </div>
+            <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-bold text-amber-300">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span id="header-xp">0 XP</span>
                 </div>
+                <div class="hidden sm:flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-bold text-emerald-300">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <span id="header-retention">100%</span>
+                </div>
+                <button id="audio-toggle-btn" onclick="app.toggleAudio()" title="Activer/Désactiver le son" class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+                    <i id="audio-toggle-icon" class="fa-solid fa-volume-high text-indigo-300 text-xs"></i>
+                </button>
+            </div>
+        </div>
 
-                <!-- Audio Toggle -->
-                <button id="audio-toggle-btn" onclick="app.toggleAudio()" title="Activer/Désactiver la prononciation vocale automatique" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition border border-slate-200">
-                    <i id="audio-toggle-icon" class="fa-solid fa-volume-high text-indigo-600"></i>
+        <!-- LES 4 BOUTONS (Ordre exact : Exercice, Audio, Leçon, Révision — Garanti sans défilement horizontal) -->
+        <div class="max-w-3xl mx-auto px-1.5 sm:px-4 py-1.5">
+            <div class="grid grid-cols-4 gap-1 sm:gap-2 w-full">
+                <!-- 1. Exercice -->
+                <button id="pill-parcours" onclick="app.switchTab('parcours')" class="w-full py-1.5 sm:py-2 px-1 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-indigo-950 shadow-sm flex items-center justify-center gap-1 active:scale-95 transition truncate">
+                    <i class="fa-solid fa-graduation-cap text-indigo-600 text-[10px] sm:text-xs shrink-0"></i>
+                    <span class="truncate">Exercice</span>
+                </button>
+                <!-- 2. Audio -->
+                <button id="pill-audio" onclick="app.switchTab('audio')" class="w-full py-1.5 sm:py-2 px-1 rounded-xl font-bold text-[11px] sm:text-xs bg-rose-500 hover:bg-rose-400 text-white shadow-sm flex items-center justify-center gap-1 active:scale-95 transition truncate">
+                    <i class="fa-solid fa-headphones-simple text-[10px] sm:text-xs shrink-0"></i>
+                    <span class="truncate">Audio</span>
+                </button>
+                <!-- 3. Leçon (anciennement Cours Déclic) -->
+                <button id="pill-declic" onclick="app.switchTab('declic')" class="w-full py-1.5 sm:py-2 px-1 rounded-xl font-bold text-[11px] sm:text-xs bg-indigo-600 hover:bg-indigo-500 text-white border border-indigo-400/30 shadow-sm flex items-center justify-center gap-1 active:scale-95 transition truncate">
+                    <i class="fa-solid fa-lightbulb text-amber-300 text-[10px] sm:text-xs shrink-0"></i>
+                    <span class="truncate">Leçon</span>
+                </button>
+                <!-- 4. Révision -->
+                <button id="pill-srs" onclick="app.startSmartSRSReview()" class="w-full py-1.5 sm:py-2 px-1 rounded-xl font-bold text-[11px] sm:text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm flex items-center justify-center gap-1 active:scale-95 transition truncate">
+                    <i class="fa-solid fa-rotate text-[10px] sm:text-xs shrink-0"></i>
+                    <span class="truncate">Révision</span>
+                    <span id="banner-srs-count" class="hidden sm:inline-block text-[9px] font-extrabold bg-slate-900/20 px-1 rounded">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- CONTENEUR PRINCIPAL -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 md:pb-8">
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
         <!-- BANNIÈRE D'ÉTAT DE LA MÉMOIRE ET CONSEIL COGNITIF -->
-        <section id="cognitive-status-bar" class="mb-6 bg-gradient-to-r from-indigo-950 via-indigo-900 to-slate-900 rounded-2xl p-4 sm:p-5 text-white shadow-lg relative overflow-hidden">
-            <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-                <div class="space-y-1.5 max-w-2xl">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-400/20 text-emerald-300 border border-emerald-400/30">
-                            <i class="fa-solid fa-check-double mr-1"></i> Cycle 1 Validé (Paliers 1–5)
-                        </span>
-                        <span id="current-stage-pill" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-400/20 text-amber-200 border border-amber-400/30">
-                            Cap sur le Cycle 2 : Paliers 6 à 10
-                        </span>
-                    </div>
-                    <h2 class="text-lg sm:text-xl font-display font-bold text-white" id="banner-headline">
-                        Passez du mot-à-mot français à la vraie logique mentale et auditive anglophone.
-                    </h2>
-                    <p class="text-xs sm:text-sm text-indigo-100/90 leading-relaxed" id="banner-subtext">
-                        Entraînez votre oreille sans support visuel dans le nouveau <strong>🎧 Labo Audio Incrémental (Paliers 1 à 6)</strong>, approfondissez vos structures dans les <strong>Paliers 6 à 10</strong> et maîtrisez les subtilités du <strong>Cours Déclic FR/EN</strong>.
-                    </p>
-                </div>
-
-                <!-- Actions rapides : Labo Audio, Cours Déclic, Révision SRS ou Continuer Palier -->
-                <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto justify-end shrink-0">
-                    <button onclick="app.switchTab('audio')" class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-rose-500 hover:bg-rose-400 text-white shadow-md transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-headphones-simple"></i>
-                        <span>Labo Audio Pur</span>
-                    </button>
-                    <button onclick="app.switchTab('declic')" class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-indigo-700/80 hover:bg-indigo-600 text-white border border-indigo-400/30 shadow-md transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-lightbulb text-amber-300"></i>
-                        <span>Cours Déclic FR/EN</span>
-                    </button>
-                    <button onclick="app.startSmartSRSReview()" id="btn-banner-srs" class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-rotate"></i>
-                        <span>Révision SRS (<span id="banner-srs-count">0</span>)</span>
-                    </button>
-                    <button onclick="app.startRecommendedLevel()" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-indigo-50 text-indigo-950 shadow-md transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-play text-indigo-600"></i>
-                        <span id="btn-continue-label">Lancer le Palier 6</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Jauges rapides de mémoire -->
-            <div class="mt-4 pt-3 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                <div class="bg-white/5 rounded-xl p-2.5 flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-sky-400/20 text-sky-300 flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <div>
-                        <div class="text-indigo-200 text-[11px]">Briques maîtrisées</div>
-                        <div class="font-bold text-sm text-white" id="stat-discovered">23 / 52</div>
-                    </div>
-                </div>
-                <div class="bg-white/5 rounded-xl p-2.5 flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-fire-flame-curved"></i>
-                    </div>
-                    <div>
-                        <div class="text-indigo-200 text-[11px]">Mémoire Court Terme</div>
-                        <div class="font-bold text-sm text-white" id="stat-short-term">0 briques</div>
-                    </div>
-                </div>
-                <div class="bg-white/5 rounded-xl p-2.5 flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-400/20 text-emerald-300 flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-vault"></i>
-                    </div>
-                    <div>
-                        <div class="text-indigo-200 text-[11px]">Mémoire Long Terme</div>
-                        <div class="font-bold text-sm text-white" id="stat-long-term">23 briques</div>
-                    </div>
-                </div>
-                <div class="bg-white/5 rounded-xl p-2.5 flex items-center justify-between gap-2">
-                    <div>
-                        <div class="text-indigo-200 text-[11px]">Accès Libre Paliers 1–10</div>
-                        <div class="font-semibold text-xs text-white">Tout débloquer</div>
-                    </div>
-                    <button id="unlock-all-toggle" onclick="app.toggleUnlockAll()" class="w-11 h-6 rounded-full bg-emerald-500 p-0.5 transition-colors relative flex items-center" title="Activer/Désactiver l'accès libre à tous les paliers">
-                        <span id="unlock-all-knob" class="w-5 h-5 rounded-full bg-white shadow transform transition-transform translate-x-5"></span>
-                    </button>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- ========================================================== -->
         <!-- VUE 1 : PARCOURS INCRÉMENTAL (PALIERS 1 À 10)              -->
@@ -270,10 +171,10 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm">
                 <div>
                     <h1 class="text-xl sm:text-2xl font-display font-bold text-slate-900">
-                        Échelle de Complexité Incrémentale (Paliers 1 à 10)
+                        Mes Cours d'Anglais (Paliers 1 à 10)
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
-                        Chaque palier s'appuie sur vos acquis précédents et ajoute une brique de pensée anglophone authentique.
+                        Apprenez l'anglais pas à pas avec des phrases simples et utiles au quotidien.
                     </p>
                 </div>
 
@@ -297,229 +198,160 @@
             </div>
 
             <!-- Grille des Paliers Incrémentaux -->
-            <div id="stages-container" class="grid grid-cols-1 gap-5">
-                <!-- Généré dynamiquement par JS -->
-            </div>
+            <!-- PALIER ACTUEL AU SOMMET (Focus direct) -->
+            <div id="active-stage-card-container" class="space-y-2"></div>
+
+            <!-- MENU DÉROULANT : TOUS LES PALIERS -->
+            <details id="all-stages-accordion" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden group">
+                <summary class="px-4 sm:px-5 py-3.5 sm:py-4 cursor-pointer list-none flex items-center justify-between text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 select-none transition">
+                    <span class="flex items-center gap-2 sm:gap-2.5">
+                        <i class="fa-solid fa-list-check text-indigo-600"></i>
+                        <span>Choisir un autre palier (Paliers 1 à 10 — Rejouer ou Explorer)</span>
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400 font-normal hidden sm:inline">Afficher les paliers</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform group-open:rotate-180"></i>
+                    </div>
+                </summary>
+                <div class="p-3 sm:p-5 border-t border-slate-100 bg-slate-50/50 space-y-4">
+                    <div id="stages-container" class="space-y-4"></div>
+                </div>
+            </details>
         </section>
 
         <!-- ========================================================== -->
         <!-- VUE NOUVELLE (V3.0) : 🎧 LABO AUDIO INCRÉMENTAL (100% SON) -->
         <!-- ========================================================== -->
-        <section id="view-audio" class="hidden space-y-6">
-            <!-- En-tête du Labo Audio Incrémental -->
-            <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-rose-950 text-white p-5 sm:p-6 rounded-3xl shadow-lg border border-indigo-500/20 relative overflow-hidden">
-                <div class="absolute -right-12 -top-12 w-52 h-52 bg-rose-500/15 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-                    <div class="space-y-2 max-w-3xl">
-                        <div class="inline-flex flex-wrap items-center gap-2">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-400/30 flex items-center gap-1.5">
-                                <i class="fa-solid fa-ear-listen"></i>
-                                <span>Compréhension Orale Pure • Zéro texte au départ</span>
-                            </span>
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
-                                <i class="fa-solid fa-layer-group mr-1"></i>6 Paliers Cumulatifs (1 mot ➔ 14 mots)
-                            </span>
-                        </div>
-                        <h1 class="text-xl sm:text-2xl font-display font-extrabold text-white">
-                            🎧 Labo Audio Incrémental : Éduquez votre oreille brique par brique
-                        </h1>
-                        <p class="text-xs sm:text-sm text-indigo-100/90 leading-relaxed">
-                            Au Palier 1, vous calibrez votre oreille sur des <strong>mots simples isolés</strong>. Puis, à chaque palier supérieur, nous <strong>reprenons les mots déjà entendus</strong> en y ajoutant de nouvelles briques pour former des groupes de mots et des phrases de plus en plus longues. Si vous bloquez, dévoilez l'indice progressif ou la phrase complète en anglais !
-                        </p>
-                    </div>
-
-                    <!-- Réglages Voix (UK/US) & Mode de Réponse + Score Audio -->
-                    <div class="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15">
-                        <div class="flex items-center justify-between gap-4">
-                            <span class="text-xs font-semibold text-indigo-200">Accent vocal :</span>
-                            <div class="flex items-center gap-1 bg-slate-900/70 p-1 rounded-xl border border-white/10">
-                                <button id="voice-btn-gb" onclick="app.setAudioVoiceAccent('en-GB')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500 text-white transition">
-                                    🇬🇧 UK
-                                </button>
-                                <button id="voice-btn-us" onclick="app.setAudioVoiceAccent('en-US')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">
-                                    🇺🇸 US
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between gap-4">
-                            <span class="text-xs font-semibold text-indigo-200">Mode de réponse :</span>
-                            <div class="flex items-center gap-1 bg-slate-900/70 p-1 rounded-xl border border-white/10">
-                                <button id="audiomode-btn-bricks" onclick="app.setAudioInputMode('bricks')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-500 text-white transition" title="Cliquer sur les mots reconnus dans l'ordre">
-                                    🧱 Briques
-                                </button>
-                                <button id="audiomode-btn-typing" onclick="app.setAudioInputMode('typing')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition" title="Taper la phrase entendue au clavier">
-                                    ⌨️ Dictée
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
-                            <span class="text-indigo-200">Défis audio validés :</span>
-                            <span id="audio-total-solved-badge" class="font-display font-extrabold text-sm text-emerald-300">0 / 30</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STUDIO D'ÉCOUTE INTERACTIF (ACTIF IMMÉDIATEMENT) -->
-            <div id="audio-studio-card" class="bg-white rounded-3xl border-2 border-indigo-100 shadow-xl overflow-hidden">
-                <!-- Barre supérieure du Studio -->
-                <div class="bg-slate-900 text-white px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500 to-indigo-600 flex items-center justify-center text-white shadow">
-                            <i class="fa-solid fa-wave-square"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span id="audio-studio-stage-pill" class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-500 text-white uppercase">
-                                    Palier Audio 1
-                                </span>
-                                <span id="audio-studio-step-pill" class="text-xs font-semibold text-indigo-200">
-                                    Défi 1 / 6
-                                </span>
-                            </div>
-                            <h2 id="audio-studio-title" class="font-display font-bold text-sm sm:text-base text-white mt-0.5">
-                                Mots Isolés & Calibration de l'Oreille (1 mot)
-                            </h2>
-                        </div>
-                    </div>
-
-                    <!-- Navigation rapide entre les défis du palier actif -->
-                    <div class="flex items-center gap-1.5" id="audio-studio-dots">
-                        <!-- Petits points de progression générés par JS -->
-                    </div>
+        <section id="view-audio" class="hidden space-y-3">
+            <!-- 1. BARRE DE CONTRÔLE COMPACTE DU MODULE AUDIO (Choix du module, Dots, UK/US) -->
+            <div class="bg-slate-900 text-white p-2.5 sm:p-3 rounded-2xl border border-indigo-950/80 shadow-md flex flex-wrap items-center justify-between gap-2">
+                <!-- Choix du module / palier (On est dedans, pas besoin de défiler en bas) -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-indigo-300 flex items-center gap-1 shrink-0">
+                        <i class="fa-solid fa-layer-group"></i> Module :
+                    </span>
+                    <select id="audio-module-select" onchange="app.selectAudioStage(parseInt(this.value), 0)" class="bg-indigo-950 border border-indigo-500/30 text-white font-bold text-xs rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-400 cursor-pointer">
+                        <option value="1">Palier 1 : Mots Isolés (1 mot)</option>
+                        <option value="2">Palier 2 : Petits Groupes (2-3 mots)</option>
+                        <option value="3">Palier 3 : Premières Phrases (4-6 mots)</option>
+                        <option value="4">Palier 4 : Expressions Courantes (6-8 mots)</option>
+                        <option value="5">Palier 5 : Phrases Fluides (8-10 mots)</option>
+                        <option value="6">Palier 6 : Grandes Phrases (10-14 mots)</option>
+                    </select>
                 </div>
 
-                <!-- Bandeau ADN Lexical du Palier en cours (Mots repris vs Nouveaux mots) -->
-                <div class="bg-slate-50 border-b border-slate-200/80 px-5 py-3 flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="font-bold text-slate-700 flex items-center gap-1">
-                            <i class="fa-solid fa-dna text-indigo-600"></i> ADN Lexical de ce palier :
-                        </span>
-                        <span id="audio-dna-reused-count" class="px-2 py-0.5 rounded-full font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                            ♻️ Base fondatrice
-                        </span>
-                        <span id="audio-dna-new-count" class="px-2 py-0.5 rounded-full font-bold bg-amber-100 text-amber-900 border border-amber-200">
-                            ✨ +8 mots clés
-                        </span>
+                <!-- Petits points des 6 défis du module + Réglage Voix -->
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1" id="audio-studio-dots">
+                        <!-- Points 1 à 6 injectés dynamiquement -->
                     </div>
-                    <div class="text-slate-500 italic text-[11px]">
-                        Écoutez l'enregistrement ci-dessous puis reconstruisez ce que vous entendez dans l'ordre.
-                    </div>
-                </div>
-
-                <!-- Cœur du Studio : Égaliseur & 3 Boutons d'Écoute (1.0x, 0.7x, Mot par mot) -->
-                <div class="p-5 sm:p-8 space-y-6">
-                    <div class="bg-gradient-to-b from-slate-900 to-indigo-950 rounded-3xl p-6 text-white shadow-inner flex flex-col items-center text-center space-y-5 relative overflow-hidden">
-                        <div class="text-xs font-bold uppercase tracking-widest text-indigo-300 flex items-center gap-2">
-                            <span id="audio-status-indicator" class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                            <span id="audio-status-label">Cliquez sur un bouton d'écoute pour entendre la séquence mystère</span>
-                        </div>
-
-                        <!-- Visualiseur d'ondes sonores (16 barres réactives) -->
-                        <div id="audio-waveform-bars" class="h-14 flex items-center justify-center gap-1.5 px-4">
-                            <div class="eq-bar w-1.5 bg-rose-400 rounded-full transition-all duration-300" style="height: 30%; animation-delay: 0.05s"></div>
-                            <div class="eq-bar w-1.5 bg-rose-500 rounded-full transition-all duration-300" style="height: 55%; animation-delay: 0.15s"></div>
-                            <div class="eq-bar w-1.5 bg-indigo-400 rounded-full transition-all duration-300" style="height: 40%; animation-delay: 0.25s"></div>
-                            <div class="eq-bar w-1.5 bg-indigo-300 rounded-full transition-all duration-300" style="height: 75%; animation-delay: 0.10s"></div>
-                            <div class="eq-bar w-1.5 bg-emerald-400 rounded-full transition-all duration-300" style="height: 45%; animation-delay: 0.30s"></div>
-                            <div class="eq-bar w-1.5 bg-rose-400 rounded-full transition-all duration-300" style="height: 85%; animation-delay: 0.20s"></div>
-                            <div class="eq-bar w-1.5 bg-indigo-400 rounded-full transition-all duration-300" style="height: 60%; animation-delay: 0.05s"></div>
-                            <div class="eq-bar w-1.5 bg-amber-400 rounded-full transition-all duration-300" style="height: 90%; animation-delay: 0.18s"></div>
-                            <div class="eq-bar w-1.5 bg-emerald-400 rounded-full transition-all duration-300" style="height: 50%; animation-delay: 0.28s"></div>
-                            <div class="eq-bar w-1.5 bg-indigo-300 rounded-full transition-all duration-300" style="height: 70%; animation-delay: 0.12s"></div>
-                            <div class="eq-bar w-1.5 bg-rose-400 rounded-full transition-all duration-300" style="height: 35%; animation-delay: 0.22s"></div>
-                            <div class="eq-bar w-1.5 bg-indigo-400 rounded-full transition-all duration-300" style="height: 65%; animation-delay: 0.08s"></div>
-                            <div class="eq-bar w-1.5 bg-emerald-400 rounded-full transition-all duration-300" style="height: 40%; animation-delay: 0.26s"></div>
-                            <div class="eq-bar w-1.5 bg-rose-500 rounded-full transition-all duration-300" style="height: 30%; animation-delay: 0.14s"></div>
-                        </div>
-
-                        <!-- Les 3 Boutons d'Écoute -->
-                        <div class="flex flex-wrap items-center justify-center gap-3 w-full">
-                            <button onclick="app.playAudioChallenge(0.96)" class="px-5 py-3 rounded-2xl font-display font-bold text-sm bg-rose-500 hover:bg-rose-400 text-white shadow-lg shadow-rose-500/25 transition flex items-center gap-2.5 animate-pulse-glow">
-                                <i class="fa-solid fa-play"></i>
-                                <span>Écoute Normale (1.0x)</span>
-                            </button>
-
-                            <button onclick="app.playAudioChallenge(0.65)" class="px-4 py-3 rounded-2xl font-display font-semibold text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-amber-200 border border-amber-400/30 transition flex items-center gap-2">
-                                <span>🐢</span>
-                                <span>Écoute Ralentie (0.7x)</span>
-                            </button>
-
-                            <button onclick="app.playWordByWordAudio()" class="px-4 py-3 rounded-2xl font-display font-semibold text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-sky-200 border border-sky-400/30 transition flex items-center gap-2" title="Détache chaque mot avec une micro-pause pour déjouer les liaisons">
-                                <span>🔍</span>
-                                <span>Mot par mot (Découpé)</span>
-                            </button>
-                        </div>
-
-                        <div class="text-[11px] text-indigo-200/80 flex items-center gap-3">
-                            <span><i class="fa-solid fa-ear-deaf mr-1"></i>Nombre de mots à reconnaître : <strong id="audio-word-count-badge" class="text-white">1 mot</strong></span>
-                            <span>•</span>
-                            <span>Écoutes effectuées : <strong id="audio-listen-counter" class="text-white">0</strong></span>
-                        </div>
-                    </div>
-
-                    <!-- ZONE DE CONSTRUCTION DE LA RÉPONSE (Mode Briques Auditives OU Mode Dictée Clavier) -->
-                    <div id="audio-interaction-area" class="space-y-4">
-                        <!-- Injecté dynamiquement par renderAudioStudioChallenge() -->
-                    </div>
-
-                    <!-- BOUTON DE VALIDATION AUDIO (Immédiatement visible sans scroll) -->
-                    <div id="audio-action-footer" class="pt-2">
-                        <button onclick="app.checkAudioStudioAnswer()" class="w-full py-3 rounded-2xl font-display font-bold text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20 transition flex items-center justify-center gap-2 active:scale-98">
-                            <span>Vérifier mon écoute</span>
-                            <i class="fa-solid fa-check-double"></i>
+                    <div class="flex items-center gap-0.5 bg-black/40 p-0.5 rounded-lg border border-white/10 text-xs">
+                        <button id="voice-btn-gb" onclick="app.setAudioVoiceAccent('en-GB')" class="px-2 py-0.5 rounded-md font-bold bg-rose-500 text-white text-[11px] transition">
+                            🇬🇧 UK
+                        </button>
+                        <button id="voice-btn-us" onclick="app.setAudioVoiceAccent('en-US')" class="px-2 py-0.5 rounded-md font-bold text-slate-300 hover:text-white text-[11px] transition">
+                            🇺🇸 US
                         </button>
                     </div>
-
-                    <!-- Panneau de Feedback après validation Audio -->
-                    <div id="audio-feedback-box" class="hidden rounded-2xl p-4 sm:p-5 border transition-all"></div>
-
-                    <!-- FILET DE SÉCURITÉ & INDICES AUDIO DÉPLIABLES -->
-                    <details id="audio-extra-details" class="border border-slate-200/90 rounded-2xl overflow-hidden group bg-slate-50/70">
-                        <summary class="px-4 py-2.5 cursor-pointer list-none flex items-center justify-between text-xs font-bold text-slate-700 hover:bg-slate-100 select-none">
-                            <span class="flex items-center gap-2">
-                                <i class="fa-solid fa-life-ring text-amber-500"></i>
-                                <span>Besoin d'aide ? Filet de sécurité & Indices progressifs</span>
-                            </span>
-                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform group-open:rotate-180"></i>
-                        </summary>
-                        <div class="p-3.5 border-t border-slate-200/70 space-y-3 bg-white">
-                            <div class="flex flex-wrap gap-2">
-                                <button onclick="app.showAudioHint('partial')" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-lightbulb text-amber-500"></i>
-                                    <span>Indice 1 : Sens FR</span>
-                                </button>
-                                <button onclick="app.showAudioHint('full')" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-eye text-indigo-600"></i>
-                                    <span>Indice 2 : Phrase complète</span>
-                                </button>
-                            </div>
-                            <div id="audio-hint-partial-box" class="hidden rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs sm:text-sm text-amber-950 space-y-1.5 animate-pop"></div>
-                            <div id="audio-hint-full-box" class="hidden rounded-xl bg-indigo-50 border border-indigo-200 p-3 text-xs sm:text-sm text-indigo-950 space-y-2 animate-pop"></div>
-                        </div>
-                    </details>
                 </div>
             </div>
 
-            <!-- LISTE DES 6 PALIERS AUDIO CUMULATIFS (AVEC ADN LEXICAL : MOTS REPRIS + MOTS AJOUTÉS) -->
-            <div class="space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div>
-                        <h2 class="text-lg sm:text-xl font-display font-bold text-slate-900">
-                            Les 6 Paliers d'Échafaudage Sonore (Du Mot Simple à la Phrase Complexe)
+            <!-- 2. STUDIO D'ÉCOUTE COMPACT (Zéro défilement superflu) -->
+            <div id="audio-studio-card" class="bg-white rounded-2xl border border-slate-200 shadow-md p-3.5 sm:p-5 space-y-4">
+                <!-- En-tête titre du défi -->
+                <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
+                    <div class="flex items-center gap-2">
+                        <span id="audio-studio-stage-pill" class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-500 text-white uppercase">
+                            Palier 1
+                        </span>
+                        <span id="audio-studio-step-pill" class="text-xs font-semibold text-slate-600">
+                            Défi 1 / 6
+                        </span>
+                        <h2 id="audio-studio-title" class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate">
+                            Mots Isolés
                         </h2>
-                        <p class="text-xs sm:text-sm text-slate-600">
-                            Chaque palier reprend systématiquement le vocabulaire entendu aux paliers précédents (<span class="text-emerald-700 font-semibold">♻️ Mots repris</span>) et y ajoute quelques nouvelles briques (<span class="text-amber-700 font-semibold">✨ Nouveaux mots</span>).
-                        </p>
+                    </div>
+
+                    <div class="text-[11px] text-slate-500 flex items-center gap-1.5 shrink-0">
+                        <span id="audio-word-count-badge" class="font-bold text-indigo-600">1 mot</span>
+                        <span>•</span>
+                        <span>Écoutes : <span id="audio-listen-counter" class="font-bold text-slate-800">0</span></span>
                     </div>
                 </div>
 
-                <div id="audio-stages-grid" class="grid grid-cols-1 gap-4">
-                    <!-- Généré dynamiquement par renderAudioLabView() -->
+                <!-- Cœur audio : mini onde + 3 BOUTONS D'ÉCOUTE -->
+                <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-xl p-3 text-white flex flex-col items-center gap-2.5">
+                    <!-- Ondes sonores compactes -->
+                    <div class="flex items-center justify-between w-full text-[11px] text-indigo-200">
+                        <div class="flex items-center gap-1.5">
+                            <span id="audio-status-indicator" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span id="audio-status-label" class="text-[11px]">Prêt à écouter</span>
+                        </div>
+                        <div id="audio-waveform-bars" class="h-4 flex items-center gap-1">
+                            <div class="eq-bar w-1 bg-rose-400 rounded-full h-2"></div>
+                            <div class="eq-bar w-1 bg-indigo-400 rounded-full h-3"></div>
+                            <div class="eq-bar w-1 bg-amber-400 rounded-full h-4"></div>
+                            <div class="eq-bar w-1 bg-emerald-400 rounded-full h-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- LES 3 TYPES D'ÉCOUTE (1.0x, 0.7x, Mot par mot) -->
+                    <div class="grid grid-cols-3 gap-1.5 sm:gap-2 w-full">
+                        <button onclick="app.playAudioChallenge(0.96)" class="py-2 px-1 rounded-xl font-bold text-xs sm:text-sm bg-rose-500 hover:bg-rose-400 text-white shadow transition flex items-center justify-center gap-1.5 active:scale-95">
+                            <i class="fa-solid fa-play text-xs"></i>
+                            <span>Normale (1.0x)</span>
+                        </button>
+                        <button onclick="app.playAudioChallenge(0.65)" class="py-2 px-1 rounded-xl font-semibold text-xs sm:text-sm bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/40 transition flex items-center justify-center gap-1.5 active:scale-95">
+                            <span>🐢</span>
+                            <span>Lente (0.7x)</span>
+                        </button>
+                        <button onclick="app.playWordByWordAudio()" class="py-2 px-1 rounded-xl font-semibold text-xs sm:text-sm bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 border border-sky-400/40 transition flex items-center justify-center gap-1.5 active:scale-95" title="Détache chaque mot">
+                            <span>🔍</span>
+                            <span>Mot par mot</span>
+                        </button>
+                    </div>
                 </div>
+
+                <!-- ZONE DE CONSTRUCTION / RÉPONSE (Briques à cliquer) -->
+                <div id="audio-interaction-area" class="space-y-3">
+                    <!-- Injecté dynamiquement par renderAudioStudioChallenge() -->
+                </div>
+
+                <!-- Bouton de Validation Audio -->
+                <div id="audio-action-footer" class="flex items-center justify-end pt-1">
+                    <button onclick="app.checkAudioStudioAnswer()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow transition flex items-center justify-center gap-2 active:scale-95">
+                        <span>Vérifier mon écoute</span>
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                </div>
+
+                <!-- Boîte de Feedback après validation -->
+                <div id="audio-feedback-box" class="hidden rounded-xl p-3 border transition-all text-xs sm:text-sm"></div>
+
+                <!-- Indices partiels (si demandés) -->
+                <div id="audio-hint-partial-box" class="hidden rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-950"></div>
+                <div id="audio-hint-full-box" class="hidden rounded-xl bg-indigo-50 border border-indigo-200 p-3 text-xs text-indigo-950"></div>
             </div>
+
+            <!-- 3. ACCORDÉON D'EXPLICATION (Le seul défilement vers le bas : lire l'explication si on le souhaite, pas tomber sur d'autres niveaux) -->
+            <details id="audio-explanation-accordion" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden group">
+                <summary class="px-4 py-3 cursor-pointer list-none flex items-center justify-between text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-50 select-none transition">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                        <span>💡 Voir l'explication et la traduction de la phrase</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform group-open:rotate-180"></i>
+                </summary>
+                <div id="audio-explanation-content" class="p-3.5 sm:p-4 border-t border-slate-100 bg-slate-50/50 space-y-2 text-xs sm:text-sm">
+                    <!-- Rempli dynamiquement -->
+                </div>
+            </details>
+
+            <!-- Éléments fantômes conservés pour compatibilité sans affichage de grilles superflues -->
+            <div id="audio-stages-grid" class="hidden"></div>
+            <div id="audio-dna-reused-count" class="hidden"></div>
+            <div id="audio-dna-new-count" class="hidden"></div>
+            <div id="audio-total-solved-badge" class="hidden"></div>
         </section>
 
         <!-- ========================================================== -->
@@ -659,123 +491,109 @@
         <!-- ========================================================== -->
         <!-- VUE 5 : MOTEUR D'EXERCICES INTERACTIFS                     -->
         <!-- ========================================================== -->
-        <!-- ========================================================== -->
-        <!-- VUE 5 : MOTEUR D'EXERCICES INTERACTIFS (FORMAT MOBILE SANS SCROLL FORCÉ) -->
-        <!-- ========================================================== -->
-        <section id="view-session" class="hidden max-w-3xl mx-auto space-y-3 pb-8">
-            <!-- CARTE D'EXERCICE PRINCIPALE (Format écran mobile sans scroll forcé) -->
-            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden">
-                <!-- En-tête de session compact -->
-                <div class="bg-slate-900 text-white px-3.5 py-2.5 sm:px-5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
-                    <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-                        <button onclick="app.CloseSession()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition shrink-0" title="Quitter la session">
-                            <i class="fa-solid fa-xmark text-xs sm:text-sm"></i>
+        <section id="view-session" class="hidden max-w-3xl mx-auto">
+            <div class="bg-white rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden">
+                <!-- En-tête de session -->
+                <div class="bg-slate-900 text-white p-4 sm:p-5 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <button onclick="app.CloseSession()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition" title="Quitter la session">
+                            <i class="fa-solid fa-xmark"></i>
                         </button>
-                        <div class="min-w-0">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span id="session-stage-badge" class="px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-indigo-500 text-white uppercase shrink-0">Palier 6</span>
-                                <span id="session-mode-label" class="text-[10px] sm:text-xs text-slate-300 font-medium truncate">Acquisition</span>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span id="session-stage-badge" class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-indigo-500 text-white uppercase">Palier 6</span>
+                                <span id="session-mode-label" class="text-xs text-slate-300 font-medium">Acquisition incrémentale</span>
                             </div>
-                            <h3 id="session-title" class="font-display font-bold text-xs sm:text-base text-white mt-0.5 truncate">Les Phrasal Verbs du Quotidien</h3>
+                            <h3 id="session-title" class="font-display font-bold text-sm sm:text-base text-white mt-0.5">Les Phrasal Verbs du Quotidien</h3>
                         </div>
                     </div>
 
                     <!-- Barre de progression de la session -->
-                    <div class="flex items-center gap-2 sm:gap-3 flex-1 max-w-[110px] sm:max-w-xs justify-end shrink-0">
-                        <div class="w-14 sm:w-full bg-white/15 h-2 sm:h-2.5 rounded-full overflow-hidden">
+                    <div class="flex items-center gap-3 flex-1 max-w-xs">
+                        <div class="w-full bg-white/15 h-2.5 rounded-full overflow-hidden">
                             <div id="session-progress-bar" class="bg-gradient-to-r from-indigo-400 to-emerald-400 h-full rounded-full transition-all duration-300" style="width: 15%"></div>
                         </div>
-                        <span id="session-step-counter" class="text-[11px] sm:text-xs font-bold text-indigo-200 shrink-0">1/6</span>
+                        <span id="session-step-counter" class="text-xs font-bold text-indigo-200 shrink-0">1/6</span>
                     </div>
                 </div>
 
-                <!-- Corps de l'exercice (Directement visible sans défiler) -->
-                <div id="exercise-body" class="p-3.5 sm:p-6 space-y-3.5 sm:space-y-5">
+                <!-- Bandeau de Réinjection Cognitive (Scaffolding Alert) -->
+                <div id="session-scaffolding-banner" class="bg-indigo-50/80 border-b border-indigo-100 px-5 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <div class="flex items-center gap-2 text-indigo-900 font-medium">
+                        <i class="fa-solid fa-link text-indigo-600"></i>
+                        <span id="session-scaffolding-text">Briques réinjectées des paliers précédents :</span>
+                    </div>
+                    <div id="session-reinjected-pills" class="flex flex-wrap gap-1.5">
+                        <!-- Pills des mots déjà connus -->
+                    </div>
+                </div>
+
+                <!-- Corps de l'exercice -->
+                <div id="exercise-body" class="p-5 sm:p-8 space-y-6">
                     <!-- Généré dynamiquement selon le type d'exercice -->
                 </div>
 
-                <!-- Pied de session : Validation et Indice direct sans défiler -->
-                <div id="session-footer" class="bg-slate-50 border-t border-slate-200/80 p-3 sm:p-4 flex items-center justify-between gap-2">
-                    <button id="btn-show-hint" onclick="app.showExerciseHint()" class="px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition flex items-center gap-1.5 shrink-0" title="Afficher l'indice et l'explication en dessous">
-                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
-                        <span>Indice / Détails</span>
+                <!-- Zone d'Indices Cognitifs Progressifs -->
+                <div class="px-5 sm:px-8 pb-4">
+                    <div id="hint-box" class="hidden rounded-2xl bg-amber-50 border border-amber-200 p-3.5 text-xs sm:text-sm text-amber-900 flex items-start gap-3 animate-pop">
+                        <i class="fa-solid fa-lightbulb text-amber-500 text-base mt-0.5"></i>
+                        <div class="flex-1">
+                            <div class="font-bold text-amber-950">Déclic Francophone & Indice Structurel</div>
+                            <p id="hint-text" class="mt-0.5 text-amber-800"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pied de session : Validation, Indice et Feedback SRS -->
+                <div id="session-footer" class="bg-slate-50 border-t border-slate-200/80 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <button id="btn-show-hint" onclick="app.showExerciseHint()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-indigo-700 hover:bg-indigo-50 border border-slate-200/90 transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-lightbulb"></i>
+                        <span>Indice & Logique Anglophone</span>
                     </button>
 
-                    <button id="btn-check-answer" onclick="app.checkCurrentAnswer()" class="flex-1 sm:flex-initial px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20 transition flex items-center justify-center gap-2 active:scale-98">
+                    <button id="btn-check-answer" onclick="app.checkCurrentAnswer()" class="w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20 transition flex items-center justify-center gap-2">
                         <span>Vérifier ma réponse</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
 
-                <!-- Panneau de Feedback après validation + Auto-évaluation SRS optimisée -->
-                <div id="feedback-panel" class="hidden border-t p-3.5 sm:p-5 transition-all">
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div id="feedback-icon-box" class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center text-lg sm:text-xl shrink-0">
+                <!-- Panneau de Feedback après validation + Auto-évaluation SRS -->
+                <div id="feedback-panel" class="hidden border-t p-5 sm:p-6 transition-all">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div id="feedback-icon-box" class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl shrink-0">
                                 <i class="fa-solid fa-check"></i>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-center justify-between gap-2">
-                                    <h4 id="feedback-title" class="font-display font-bold text-sm sm:text-base"></h4>
-                                    <button onclick="app.speakCurrentTarget()" class="px-2 sm:px-2.5 py-1 rounded-lg bg-white/90 text-indigo-700 text-[11px] sm:text-xs font-semibold border border-slate-200 flex items-center gap-1 shadow-sm shrink-0">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h4 id="feedback-title" class="font-display font-bold text-base sm:text-lg">Excellent rappel actif !</h4>
+                                    <button onclick="app.speakCurrentTarget()" class="px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-indigo-700 text-xs font-semibold border border-slate-200 flex items-center gap-1 shadow-sm">
                                         <i class="fa-solid fa-volume-high"></i> Écouter
                                     </button>
                                 </div>
-                                <div id="feedback-explanation" class="text-xs sm:text-sm mt-1 leading-relaxed"></div>
+                                <p id="feedback-explanation" class="text-xs sm:text-sm mt-1"></p>
                             </div>
                         </div>
 
-                        <!-- Boutons d'ancrage SRS (sur une seule ligne compacte au pouce) -->
-                        <div class="pt-2 border-t border-black/10 flex items-center gap-1.5 sm:gap-2">
-                            <button onclick="app.nextExerciseStep(1)" class="flex-1 py-2 sm:py-2.5 px-2 rounded-xl text-xs font-bold bg-white hover:bg-rose-50 text-rose-700 border border-rose-200 shadow-sm transition">
-                                Hésitant
-                            </button>
-                            <button onclick="app.nextExerciseStep(2)" class="flex-[1.3] py-2 sm:py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md transition flex items-center justify-center gap-1.5">
-                                <span>Bien ancré</span>
-                                <i class="fa-solid fa-forward-step text-xs"></i>
-                            </button>
-                            <button onclick="app.nextExerciseStep(3)" class="flex-1 py-2 sm:py-2.5 px-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition" title="Passer directement au niveau de maîtrise supérieur">
-                                Facile (+2)
-                            </button>
+                        <!-- Boutons d'ancrage SRS (Répétition Espacée) -->
+                        <div class="flex flex-col items-stretch sm:items-end gap-1.5 shrink-0">
+                            <span class="text-[11px] font-semibold uppercase tracking-wider opacity-75">Ressenti mémoriel (Ajuste le SRS) :</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="app.nextExerciseStep(1)" class="px-3 py-2 rounded-xl text-xs font-bold bg-white hover:bg-rose-50 text-rose-700 border border-rose-200 shadow-sm transition">
+                                    Hésitant (Revoir vite)
+                                </button>
+                                <button onclick="app.nextExerciseStep(2)" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md transition flex items-center gap-1.5">
+                                    <span>Bien ancré</span>
+                                    <i class="fa-solid fa-forward-step"></i>
+                                </button>
+                                <button onclick="app.nextExerciseStep(3)" class="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition" title="Passer directement au niveau de maîtrise supérieur">
+                                    Facile (+2 SRS)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- ========================================================================= -->
-            <!-- ZONE D'INFORMATIONS SUPPLÉMENTAIRES SUR L'EXERCICE EN COURS               -->
-            <!-- (Priorisée uniquement si l'utilisateur défile vers le bas ou clique Indice) -->
-            <!-- ========================================================================= -->
-            <details id="exercise-extra-details" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden group">
-                <summary class="px-4 py-3 cursor-pointer list-none flex items-center justify-between text-xs font-bold text-slate-700 hover:bg-slate-50 select-none transition">
-                    <span class="flex items-center gap-2">
-                        <i class="fa-solid fa-circle-info text-indigo-600"></i>
-                        <span>Informations supplémentaires (Indice, Déclic FR/EN & Briques acquises)</span>
-                    </span>
-                    <i class="fa-solid fa-chevron-down text-slate-400 transition-transform group-open:rotate-180"></i>
-                </summary>
-                <div class="p-4 pt-2 border-t border-slate-100 space-y-3 text-xs">
-                    <!-- Zone d'Indices Cognitifs Progressifs (Placée ici pour ne jamais gêner le jeu) -->
-                    <div id="hint-box" class="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-950 space-y-1 animate-pop">
-                        <div class="font-bold text-amber-950 flex items-center gap-1.5">
-                            <i class="fa-solid fa-lightbulb text-amber-500"></i>
-                            <span>Déclic Francophone & Indice Structurel</span>
-                        </div>
-                        <p id="hint-text" class="mt-0.5 text-amber-900 leading-relaxed">Touchez « Indice / Détails » pour afficher l'aide mnémonique.</p>
-                    </div>
-
-                    <!-- Bandeau de Réinjection Cognitive (Scaffolding Alert) -->
-                    <div id="session-scaffolding-banner" class="rounded-xl bg-indigo-50/80 border border-indigo-100 p-3 space-y-1.5">
-                        <div class="flex items-center gap-2 text-indigo-950 font-bold">
-                            <i class="fa-solid fa-link text-indigo-600"></i>
-                            <span id="session-scaffolding-text">Briques réinjectées des paliers précédents :</span>
-                        </div>
-                        <div id="session-reinjected-pills" class="flex flex-wrap gap-1.5 pt-0.5">
-                            <!-- Pills des mots déjà connus -->
-                        </div>
-                    </div>
-                </div>
-            </details>
         </section>
 
     </main>
@@ -2152,10 +1970,9 @@
                 audioEnabled: true,
                 audioAccent: 'en-GB',
                 audioInputMode: 'bricks', // 'bricks' (briques séquentielles) ou 'typing' (dictée clavier)
-                unlockAllStages: false, // Verrouillage par défaut : progression séquentielle
-                completedStages: {}, // { 1: true, ... }
+                unlockAllStages: false, // Activé par défaut pour explorer librement les Paliers 6 à 10
                 activeTab: 'parcours',
-                cycleFilter: 'all', // Affichage de l'ensemble du parcours
+                cycleFilter: 'cycle2', // Focus direct sur les nouveaux Paliers 6 à 10
                 declicCategoryFilter: 'all',
                 declicQuizSolved: {}, // { q_d1_1: true, ... }
                 audioSolved: {}, // { aud_1_1: true, ... }
@@ -2266,11 +2083,6 @@
 
                 if (!this.state.declicQuizSolved) this.state.declicQuizSolved = {};
                 if (!this.state.audioSolved) this.state.audioSolved = {};
-                if (!this.state.completedStages) this.state.completedStages = {};
-                if (localStorage.getItem('lingobrick_progression_locked_init') !== 'true') {
-                    this.state.unlockAllStages = false;
-                    localStorage.setItem('lingobrick_progression_locked_init', 'true');
-                }
             },
 
             saveState() {
@@ -2403,22 +2215,16 @@
 
             isStageUnlocked(stageNum) {
                 if (stageNum === 1 || this.state.unlockAllStages) return true;
-                if (this.state.completedStages && this.state.completedStages[stageNum - 1]) return true;
                 const prevProgress = this.getStageProgress(stageNum - 1);
                 return prevProgress.percent >= 60;
             },
 
             getRecommendedStage() {
                 for (let s = 1; s <= 10; s++) {
-                    if (this.isStageUnlocked(s)) {
-                        const prog = this.getStageProgress(s);
-                        if (prog.percent < 100) return s;
-                    }
+                    const prog = this.getStageProgress(s);
+                    if (prog.percent < 100) return s;
                 }
-                for (let s = 10; s >= 1; s--) {
-                    if (this.isStageUnlocked(s)) return s;
-                }
-                return 1;
+                return 10;
             },
 
             simulateTimeDecay(hours = 24) {
@@ -2439,41 +2245,29 @@
              */
             switchTab(tabName) {
                 this.state.activeTab = tabName;
-                this.session.active = false;
+                if (tabName !== 'session') this.session.active = false;
 
                 ['parcours', 'audio', 'declic', 'cerveau', 'echafaudage', 'session'].forEach(t => {
                     const el = document.getElementById(`view-${t}`);
                     if (el) el.classList.toggle('hidden', t !== tabName);
                 });
 
-                document.getElementById('cognitive-status-bar').classList.toggle('hidden', tabName === 'session');
+                // Mettre en valeur le bouton actif
+                const pAudio = document.getElementById('pill-audio');
+                const pDeclic = document.getElementById('pill-declic');
+                const pParcours = document.getElementById('pill-parcours');
 
-                // Afficher ou masquer la barre du bas selon si on est en plein exercice
-                const mobileNav = document.getElementById('mobile-bottom-nav');
-                if (mobileNav) {
-                    mobileNav.classList.toggle('hidden', tabName === 'session');
-                }
+                if (pAudio) pAudio.className = tabName === 'audio' 
+                    ? 'px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-rose-600 text-white ring-2 ring-rose-300 shadow-md transition flex items-center gap-2 shrink-0'
+                    : 'px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-rose-500/90 hover:bg-rose-500 text-white shadow-sm transition flex items-center gap-2 shrink-0';
 
-                ['parcours', 'audio', 'declic', 'cerveau', 'echafaudage'].forEach(t => {
-                    // Navigation Desktop
-                    const btn = document.getElementById(`nav-${t}`);
-                    if (btn) {
-                        if (t === tabName) {
-                            btn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 bg-white text-indigo-600 shadow-sm whitespace-nowrap';
-                        } else {
-                            btn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900 whitespace-nowrap';
-                        }
-                    }
-                    // Navigation Mobile (Barre inférieure)
-                    const mBtn = document.getElementById(`mobile-nav-${t}`);
-                    if (mBtn) {
-                        if (t === tabName) {
-                            mBtn.className = 'flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-indigo-600 font-bold transition';
-                        } else {
-                            mBtn.className = 'flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 font-medium transition';
-                        }
-                    }
-                });
+                if (pDeclic) pDeclic.className = tabName === 'declic'
+                    ? 'px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-500 text-white ring-2 ring-indigo-300 shadow-md transition flex items-center gap-2 shrink-0'
+                    : 'px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600/90 hover:bg-indigo-600 text-white border border-indigo-400/30 shadow-sm transition flex items-center gap-2 shrink-0';
+
+                if (pParcours) pParcours.className = tabName === 'parcours'
+                    ? 'px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white text-indigo-950 ring-2 ring-indigo-400 shadow-md transition flex items-center gap-2 shrink-0'
+                    : 'px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/90 hover:bg-white text-indigo-950 shadow-sm transition flex items-center gap-2 shrink-0';
 
                 this.renderAll();
                 if (tabName === 'audio') {
@@ -2513,14 +2307,10 @@
             },
 
             renderHeaderAndBanner() {
-                document.getElementById('header-xp').textContent = `${this.state.xp} XP`;
+                const headerXp = document.getElementById('header-xp');
+                if (headerXp) headerXp.textContent = `${this.state.xp} XP`;
 
                 const discovered = KNOWLEDGE_BRICKS.filter(b => (this.state.srs[b.id]?.box || 0) >= 1);
-                const shortTerm = KNOWLEDGE_BRICKS.filter(b => {
-                    const box = this.state.srs[b.id]?.box || 0;
-                    return box >= 1 && box <= 3;
-                });
-                const longTerm = KNOWLEDGE_BRICKS.filter(b => (this.state.srs[b.id]?.box || 0) >= 4);
                 const dueBricks = this.getDueBricks();
 
                 let retention = 100;
@@ -2528,42 +2318,358 @@
                     const nonDue = discovered.length - dueBricks.length;
                     retention = Math.max(45, Math.round((nonDue / discovered.length) * 100));
                 }
-                document.getElementById('header-retention').textContent = `${retention}%`;
+                const headerRet = document.getElementById('header-retention');
+                if (headerRet) headerRet.textContent = `${retention}%`;
 
-                document.getElementById('stat-discovered').textContent = `${discovered.length} / ${KNOWLEDGE_BRICKS.length}`;
-                document.getElementById('stat-short-term').textContent = `${shortTerm.length} brique${shortTerm.length > 1 ? 's' : ''}`;
-                document.getElementById('stat-long-term').textContent = `${longTerm.length} brique${longTerm.length > 1 ? 's' : ''}`;
-
-                const srsBadge = document.getElementById('srs-badge-count');
-                const mSrsBadge = document.getElementById('mobile-srs-badge-count');
-                document.getElementById('banner-srs-count').textContent = dueBricks.length;
-                if (dueBricks.length > 0) {
-                    if (srsBadge) { srsBadge.textContent = dueBricks.length; srsBadge.classList.remove('hidden'); }
-                    if (mSrsBadge) { mSrsBadge.textContent = dueBricks.length; mSrsBadge.classList.remove('hidden'); }
-                } else {
-                    if (srsBadge) srsBadge.classList.add('hidden');
-                    if (mSrsBadge) mSrsBadge.classList.add('hidden');
-                }
-
-                const toggleBtn = document.getElementById('unlock-all-toggle');
-                const knob = document.getElementById('unlock-all-knob');
-                if (this.state.unlockAllStages) {
-                    toggleBtn.className = 'w-11 h-6 rounded-full bg-emerald-500 p-0.5 transition-colors relative flex items-center';
-                    knob.className = 'w-5 h-5 rounded-full bg-white shadow transform transition-transform translate-x-5';
-                } else {
-                    toggleBtn.className = 'w-11 h-6 rounded-full bg-white/20 p-0.5 transition-colors relative flex items-center';
-                    knob.className = 'w-5 h-5 rounded-full bg-white shadow transform transition-transform translate-x-0';
-                }
+                const bannerSrs = document.getElementById('banner-srs-count');
+                if (bannerSrs) bannerSrs.textContent = dueBricks.length;
 
                 const recStage = this.getRecommendedStage();
-                const stageMeta = STAGES_CONFIG.find(s => s.stage === recStage);
-                document.getElementById('current-stage-pill').textContent = `Prochain objectif : Palier ${recStage} — ${stageMeta.title.split('—')[1].trim()}`;
-                document.getElementById('btn-continue-label').textContent = `Lancer le Palier ${recStage}`;
+                const contLbl = document.getElementById('btn-continue-label');
+                if (contLbl) contLbl.textContent = 'Cours';
+            },
+
+            renderParcoursView() {
+                const activeContainer = document.getElementById('active-stage-card-container');
+                const listContainer = document.getElementById('stages-container');
+                if (!listContainer) return;
+
+                const colorMap = {
+                    indigo: { bg: 'bg-indigo-50', border: 'border-indigo-200', iconBg: 'bg-indigo-600', text: 'text-indigo-700', bar: 'bg-indigo-600' },
+                    sky: { bg: 'bg-sky-50', border: 'border-sky-200', iconBg: 'bg-sky-600', text: 'text-sky-700', bar: 'bg-sky-600' },
+                    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', iconBg: 'bg-emerald-600', text: 'text-emerald-700', bar: 'bg-emerald-600' },
+                    violet: { bg: 'bg-violet-50', border: 'border-violet-200', iconBg: 'bg-violet-600', text: 'text-violet-700', bar: 'bg-violet-600' },
+                    amber: { bg: 'bg-amber-50', border: 'border-amber-200', iconBg: 'bg-amber-500', text: 'text-amber-800', bar: 'bg-amber-500' }
+                };
+
+                const currentStageNum = this.getRecommendedStage();
+                const currentCfg = STAGES_CONFIG.find(s => s.stage === currentStageNum) || STAGES_CONFIG[0];
+
+                // 1. Afficher uniquement le Palier en cours au sommet (Focus direct)
+                if (activeContainer) {
+                    activeContainer.innerHTML = this.buildStageCardHtml(currentCfg, colorMap, true);
+                }
+
+                // 2. Afficher tous les paliers dans le menu déroulant
+                let stagesToRender = [...STAGES_CONFIG];
+                if (this.state.cycleFilter === 'cycle1') {
+                    stagesToRender = stagesToRender.filter(s => s.cycle === 1);
+                } else if (this.state.cycleFilter === 'cycle2') {
+                    stagesToRender = stagesToRender.filter(s => s.cycle === 2);
+                }
+
+                listContainer.innerHTML = stagesToRender.map(cfg => this.buildStageCardHtml(cfg, colorMap, false)).join('');
+            },
+
+            buildStageCardHtml(cfg, colorMap, isFeatured = false) {
+                const prog = this.getStageProgress(cfg.stage);
+                const unlocked = this.isStageUnlocked(cfg.stage);
+                const c = colorMap[cfg.color];
+                const stageBricks = KNOWLEDGE_BRICKS.filter(b => b.stage === cfg.stage);
+
+                // Mots disposés en 2 en ligne / 2 colonnes (grid-cols-2) pour gain de place maximal
+                const bricksPreviewHtml = stageBricks.map(b => {
+                    const box = this.state.srs[b.id]?.box || 0;
+                    const isDue = this.isBrickDue(b.id);
+                    let pillClass = 'bg-slate-50 text-slate-800 border-slate-200 hover:border-indigo-300';
+                    let statusIcon = '<i class="fa-regular fa-circle text-[8px] text-slate-400 shrink-0"></i>';
+
+                    if (isDue) {
+                        pillClass = 'bg-amber-50 text-amber-900 border-amber-300 font-semibold';
+                        statusIcon = '<i class="fa-solid fa-clock-rotate-left text-[9px] text-amber-600 shrink-0"></i>';
+                    } else if (box >= 4) {
+                        pillClass = 'bg-emerald-50 text-emerald-900 border-emerald-200 font-semibold';
+                        statusIcon = '<i class="fa-solid fa-check-double text-[9px] text-emerald-600 shrink-0"></i>';
+                    } else if (box >= 1) {
+                        pillClass = 'bg-indigo-50 text-indigo-900 border-indigo-200 font-medium';
+                        statusIcon = `<span class="text-[9px] font-bold text-indigo-600 shrink-0">Niv.${box}</span>`;
+                    }
+
+                    return `
+                        <button onclick="app.speak('${b.en.replace(/'/g, "\\'")}')" title="Français : ${b.fr} (Cliquer pour écouter)"
+                            class="px-2.5 py-1.5 rounded-lg text-xs border transition hover:bg-white active:scale-98 flex items-center justify-between text-left truncate shadow-2xs ${pillClass}">
+                            <div class="flex items-center gap-1.5 min-w-0 truncate">
+                                ${statusIcon}
+                                <span class="font-bold truncate text-[11px] sm:text-xs">${b.en}</span>
+                            </div>
+                            <i class="fa-solid fa-volume-high text-[10px] opacity-40 shrink-0 ml-1"></i>
+                        </button>
+                    `;
+                }).join('');
+
+                const featuredBadge = isFeatured
+                    ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-600 text-white shadow-sm flex items-center gap-1"><i class="fa-solid fa-play text-[8px]"></i>Palier en cours</span>`
+                    : '';
+
+                return `
+                    <div class="bg-white rounded-2xl border ${isFeatured ? 'border-indigo-400 ring-2 ring-indigo-500/20 shadow-md' : (unlocked ? 'border-slate-200 shadow-sm' : 'border-slate-200/60 opacity-75 bg-slate-50/50')} transition p-3.5 sm:p-5 relative overflow-hidden">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4">
+                            <!-- Info gauche -->
+                            <div class="flex items-start gap-3 max-w-3xl">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${unlocked ? c.iconBg : 'bg-slate-300 text-slate-500'} text-white flex items-center justify-center text-base sm:text-xl shrink-0 shadow">
+                                    <i class="fa-solid ${unlocked ? cfg.icon : 'fa-lock'}"></i>
+                                </div>
+                                <div class="space-y-0.5 min-w-0">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        ${featuredBadge}
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${c.bg} ${c.text} border ${c.border}">
+                                            Palier ${cfg.stage}
+                                        </span>
+                                        ${prog.percent === 100 ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800"><i class="fa-solid fa-check mr-1"></i>Terminé</span>` : ''}
+                                    </div>
+                                    <h3 class="text-base sm:text-lg font-display font-bold text-slate-900">${cfg.title}</h3>
+                                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${cfg.description}</p>
+                                </div>
+                            </div>
+
+                            <!-- Progression & Action droite -->
+                            <div class="flex flex-row lg:flex-col items-center lg:items-end justify-between gap-2.5 shrink-0 border-t lg:border-t-0 pt-2 lg:pt-0 border-slate-100">
+                                <div class="w-32 sm:w-40">
+                                    <div class="flex justify-between text-[11px] font-semibold mb-0.5">
+                                        <span class="text-slate-500">Progression</span>
+                                        <span class="${c.text}">${prog.learned}/${prog.total} (${prog.percent}%)</span>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="${c.bar} h-full rounded-full transition-all duration-500" style="width: ${prog.percent}%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    ${unlocked ? `
+                                        <button onclick="app.startStageSession(${cfg.stage})" class="px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition flex items-center justify-center gap-1.5 active:scale-95">
+                                            <i class="fa-solid fa-play text-xs"></i>
+                                            <span>${prog.percent === 0 ? 'Commencer' : (prog.percent === 100 ? 'Rejouer' : 'Continuer')}</span>
+                                        </button>
+                                    ` : `
+                                        <button disabled class="px-3 py-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed flex items-center justify-center gap-1">
+                                            <i class="fa-solid fa-lock text-xs"></i>
+                                            <span>Verrouillé</span>
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mots du palier : GRILLE 2 PAR LIGNE / 2 COLONNES -->
+                        <div class="mt-2.5 pt-2 border-t border-slate-100">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Mots à écouter (2 par ligne) :</span>
+                            <div class="grid grid-cols-2 gap-1.5 max-h-32 overflow-y-auto no-scrollbar">
+                                ${bricksPreviewHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            toggleBriefing(stageNum) {
+                this.state.openBriefings[stageNum] = !this.state.openBriefings[stageNum];
+                this.renderParcoursView();
             },
 
             /**
-             * RENDU DE LA VUE 1 : PARCOURS PAR PALIERS (1 À 10) AVEC BRIEFING COGNITIF
+             * RENDU GLOBAL DE L'INTERFACE
              */
+            renderAll() {
+                this.renderHeaderAndBanner();
+                this.renderParcoursView();
+                this.renderAudioLabView();
+                this.renderDeclicLessonsView();
+                this.renderCerveauView();
+                this.renderScaffoldingView();
+            },
+
+            renderHeaderAndBanner() {
+                const headerXp = document.getElementById('header-xp');
+                if (headerXp) headerXp.textContent = `${this.state.xp} XP`;
+
+                const discovered = KNOWLEDGE_BRICKS.filter(b => (this.state.srs[b.id]?.box || 0) >= 1);
+                const dueBricks = this.getDueBricks();
+
+                let retention = 100;
+                if (discovered.length > 0) {
+                    const nonDue = discovered.length - dueBricks.length;
+                    retention = Math.max(45, Math.round((nonDue / discovered.length) * 100));
+                }
+                const headerRet = document.getElementById('header-retention');
+                if (headerRet) headerRet.textContent = `${retention}%`;
+
+                const bannerSrs = document.getElementById('banner-srs-count');
+                if (bannerSrs) bannerSrs.textContent = dueBricks.length;
+
+                const recStage = this.getRecommendedStage();
+                const contLbl = document.getElementById('btn-continue-label');
+                if (contLbl) contLbl.textContent = 'Cours';
+            },
+
+            renderParcoursView() {
+                const activeContainer = document.getElementById('active-stage-card-container');
+                const listContainer = document.getElementById('stages-container');
+                if (!listContainer) return;
+
+                const colorMap = {
+                    indigo: { bg: 'bg-indigo-50', border: 'border-indigo-200', iconBg: 'bg-indigo-600', text: 'text-indigo-700', bar: 'bg-indigo-600' },
+                    sky: { bg: 'bg-sky-50', border: 'border-sky-200', iconBg: 'bg-sky-600', text: 'text-sky-700', bar: 'bg-sky-600' },
+                    emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', iconBg: 'bg-emerald-600', text: 'text-emerald-700', bar: 'bg-emerald-600' },
+                    violet: { bg: 'bg-violet-50', border: 'border-violet-200', iconBg: 'bg-violet-600', text: 'text-violet-700', bar: 'bg-violet-600' },
+                    amber: { bg: 'bg-amber-50', border: 'border-amber-200', iconBg: 'bg-amber-500', text: 'text-amber-800', bar: 'bg-amber-500' }
+                };
+
+                const currentStageNum = this.getRecommendedStage();
+                const currentCfg = STAGES_CONFIG.find(s => s.stage === currentStageNum) || STAGES_CONFIG[0];
+
+                // 1. Afficher uniquement le Palier en cours au sommet (Focus direct)
+                if (activeContainer) {
+                    activeContainer.innerHTML = this.buildStageCardHtml(currentCfg, colorMap, true);
+                }
+
+                // 2. Afficher tous les paliers dans le menu déroulant
+                let stagesToRender = [...STAGES_CONFIG];
+                if (this.state.cycleFilter === 'cycle1') {
+                    stagesToRender = stagesToRender.filter(s => s.cycle === 1);
+                } else if (this.state.cycleFilter === 'cycle2') {
+                    stagesToRender = stagesToRender.filter(s => s.cycle === 2);
+                }
+
+                listContainer.innerHTML = stagesToRender.map(cfg => this.buildStageCardHtml(cfg, colorMap, false)).join('');
+            },
+
+            buildStageCardHtml(cfg, colorMap, isFeatured = false) {
+                const prog = this.getStageProgress(cfg.stage);
+                const unlocked = this.isStageUnlocked(cfg.stage);
+                const c = colorMap[cfg.color];
+                const stageBricks = KNOWLEDGE_BRICKS.filter(b => b.stage === cfg.stage);
+
+                const bricksPreviewHtml = stageBricks.map(b => {
+                    const box = this.state.srs[b.id]?.box || 0;
+                    const isDue = this.isBrickDue(b.id);
+                    let pillClass = 'bg-slate-100 text-slate-600 border-slate-200';
+                    let statusIcon = '<i class="fa-regular fa-circle text-[9px] text-slate-400"></i>';
+
+                    if (isDue) {
+                        pillClass = 'bg-amber-50 text-amber-900 border-amber-300 font-semibold';
+                        statusIcon = '<i class="fa-solid fa-clock-rotate-left text-[10px] text-amber-600"></i>';
+                    } else if (box >= 4) {
+                        pillClass = 'bg-emerald-50 text-emerald-900 border-emerald-200 font-semibold';
+                        statusIcon = '<i class="fa-solid fa-check-double text-[10px] text-emerald-600"></i>';
+                    } else if (box >= 1) {
+                        pillClass = 'bg-indigo-50 text-indigo-900 border-indigo-200 font-medium';
+                        statusIcon = `<span class="text-[10px] font-bold text-indigo-600">Niv.${box}</span>`;
+                    }
+
+                    return `
+                        <button onclick="app.speak('${b.en.replace(/'/g, "\\'")}')" title="Français : ${b.fr} (Cliquer pour écouter)"
+                            class="px-2.5 py-1 rounded-xl text-xs border transition hover:scale-105 flex items-center gap-1.5 text-left ${pillClass}">
+                            ${statusIcon}
+                            <span>${b.en}</span>
+                            <i class="fa-solid fa-volume-low opacity-50 text-[10px]"></i>
+                        </button>
+                    `;
+                }).join('');
+
+                const featuredBadge = isFeatured
+                    ? `<span class="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-indigo-600 text-white shadow-sm flex items-center gap-1"><i class="fa-solid fa-play text-[9px]"></i>Votre Palier en cours</span>`
+                    : '';
+
+                return `
+                    <div class="bg-white rounded-2xl border ${isFeatured ? 'border-indigo-400 ring-2 ring-indigo-500/20 shadow-md' : (unlocked ? 'border-slate-200 shadow-sm hover:shadow-md' : 'border-slate-200/60 opacity-75 bg-slate-50/50')} transition p-4 sm:p-5 relative overflow-hidden">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                            <!-- Info gauche -->
+                            <div class="flex items-start gap-3 sm:gap-4 max-w-3xl">
+                                <div class="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl ${unlocked ? c.iconBg : 'bg-slate-300 text-slate-500'} text-white flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-md">
+                                    <i class="fa-solid ${unlocked ? cfg.icon : 'fa-lock'}"></i>
+                                </div>
+                                <div class="space-y-1 min-w-0">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        ${featuredBadge}
+                                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${c.bg} ${c.text} border ${c.border}">
+                                            Palier ${cfg.stage}
+                                        </span>
+                                        ${prog.percent === 100 ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800"><i class="fa-solid fa-check mr-1"></i>Terminé</span>` : ''}
+                                    </div>
+                                    <h3 class="text-base sm:text-lg font-display font-bold text-slate-900">${cfg.title}</h3>
+                                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${cfg.description}</p>
+                                </div>
+                            </div>
+
+                            <!-- Progression & Action droite -->
+                            <div class="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end justify-between gap-2.5 shrink-0 border-t lg:border-t-0 pt-3 lg:pt-0 border-slate-100">
+                                <div class="w-full sm:w-44">
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span class="text-slate-600">Progression</span>
+                                        <span class="${c.text}">${prog.learned}/${prog.total} (${prog.percent}%)</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="${c.bar} h-full rounded-full transition-all duration-500" style="width: ${prog.percent}%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-2">
+                                    ${unlocked ? `
+                                        <button onclick="app.startStageSession(${cfg.stage})" class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow transition flex items-center justify-center gap-2 active:scale-95">
+                                            <i class="fa-solid fa-play"></i>
+                                            <span>${prog.percent === 0 ? 'Commencer' : (prog.percent === 100 ? 'Rejouer' : 'Continuer')}</span>
+                                        </button>
+                                    ` : `
+                                        <button disabled class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-bold text-xs bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed flex items-center justify-center gap-1.5">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <span>Verrouillé (Palier ${cfg.stage - 1} requis)</span>
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Briques et mots du palier (Écoutables) -->
+                        <div class="mt-3.5 pt-3 border-t border-slate-100">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Mots et phrases de ce cours (cliquez pour écouter) :</span>
+                            <div class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto no-scrollbar">
+                                ${bricksPreviewHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            toggleBriefing(stageNum) {
+                this.state.openBriefings[stageNum] = !this.state.openBriefings[stageNum];
+                this.renderParcoursView();
+            },
+
+            /**
+             * RENDU GLOBAL DE L'INTERFACE
+             */
+            renderAll() {
+                this.renderHeaderAndBanner();
+                this.renderParcoursView();
+                this.renderAudioLabView();
+                this.renderDeclicLessonsView();
+                this.renderCerveauView();
+                this.renderScaffoldingView();
+            },
+
+            renderHeaderAndBanner() {
+                const headerXp = document.getElementById('header-xp');
+                if (headerXp) headerXp.textContent = `${this.state.xp} XP`;
+
+                const discovered = KNOWLEDGE_BRICKS.filter(b => (this.state.srs[b.id]?.box || 0) >= 1);
+                const dueBricks = this.getDueBricks();
+
+                let retention = 100;
+                if (discovered.length > 0) {
+                    const nonDue = discovered.length - dueBricks.length;
+                    retention = Math.max(45, Math.round((nonDue / discovered.length) * 100));
+                }
+                const headerRet = document.getElementById('header-retention');
+                if (headerRet) headerRet.textContent = `${retention}%`;
+
+                const bannerSrs = document.getElementById('banner-srs-count');
+                if (bannerSrs) bannerSrs.textContent = dueBricks.length;
+
+                const recStage = this.getRecommendedStage();
+                const contLbl = document.getElementById('btn-continue-label');
+                if (contLbl) contLbl.textContent = 'Cours';
+            },
+
             renderParcoursView() {
                 const container = document.getElementById('stages-container');
                 if (!container) return;
@@ -2755,7 +2861,7 @@
                 this.prepareAudioStudioChallenge();
                 this.renderAudioLabView();
                 const studioEl = document.getElementById('audio-studio-card');
-                if (studioEl) studioEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (studioEl && studioEl.scrollIntoView) studioEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 setTimeout(() => this.playAudioChallenge(0.95), 220);
             },
 
@@ -2856,154 +2962,94 @@
 
             renderAudioLabView() {
                 const studioCard = document.getElementById('audio-studio-card');
-                const stagesGrid = document.getElementById('audio-stages-grid');
-                if (!studioCard || !stagesGrid) return;
+                if (!studioCard) return;
 
                 // S'assurer que le défi courant est initialisé
                 if (!this.audioStudio.availableTokens || this.audioStudio.availableTokens.length === 0) {
                     this.prepareAudioStudioChallenge();
                 }
 
-                // Compteur total de défis audio résolus
-                const totalChallenges = AUDIO_LAB_STAGES.reduce((acc, s) => acc + s.challenges.length, 0);
-                const solvedCount = Object.keys(this.state.audioSolved || {}).length;
-                const badgeEl = document.getElementById('audio-total-solved-badge');
-                if (badgeEl) badgeEl.textContent = `${solvedCount} / ${totalChallenges}`;
-
-                // Mettre à jour l'en-tête du Studio
                 const st = this.getCurrentAudioStageObj();
                 const ch = this.getCurrentAudioChallengeObj();
                 const targetWordCount = ch.en.split(' ').length;
 
-                document.getElementById('audio-studio-stage-pill').textContent = `Palier Audio ${st.stage}`;
-                document.getElementById('audio-studio-step-pill').textContent = `Défi ${this.audioStudio.challengeIndex + 1} / ${st.challenges.length}`;
-                document.getElementById('audio-studio-title').textContent = st.title.split('—')[1]?.trim() || st.title;
-                document.getElementById('audio-word-count-badge').textContent = `${targetWordCount} mot${targetWordCount > 1 ? 's' : ''}`;
-                document.getElementById('audio-listen-counter').textContent = this.audioStudio.listenCount;
+                // Mettre à jour le sélecteur de module pour refléter le palier actif
+                const modSelect = document.getElementById('audio-module-select');
+                if (modSelect) modSelect.value = st.stage;
 
-                // Bandeau ADN Lexical du Palier dans le Studio
-                const reusedCountEl = document.getElementById('audio-dna-reused-count');
-                const newCountEl = document.getElementById('audio-dna-new-count');
-                if (st.reusedWords.length === 0) {
-                    reusedCountEl.textContent = '♻️ Palier Fondateur (Premières briques)';
-                } else {
-                    reusedCountEl.textContent = `♻️ Reprend les mots des Paliers 1 à ${st.stage - 1}`;
-                }
-                newCountEl.textContent = `✨ +${st.newWords.length} nouveaux mots ajoutés`;
+                const stagePill = document.getElementById('audio-studio-stage-pill');
+                if (stagePill) stagePill.textContent = `Palier ${st.stage}`;
 
-                // Petits points de navigation entre les défis du palier
+                const stepPill = document.getElementById('audio-studio-step-pill');
+                if (stepPill) stepPill.textContent = `Défi ${this.audioStudio.challengeIndex + 1} / ${st.challenges.length}`;
+
+                const titleEl = document.getElementById('audio-studio-title');
+                if (titleEl) titleEl.textContent = st.title.split('—')[1]?.trim() || st.title;
+
+                const countEl = document.getElementById('audio-word-count-badge');
+                if (countEl) countEl.textContent = `${targetWordCount} mot${targetWordCount > 1 ? 's' : ''}`;
+
+                const listenEl = document.getElementById('audio-listen-counter');
+                if (listenEl) listenEl.textContent = this.audioStudio.listenCount;
+
+                // Petits points de navigation entre les 6 défis du palier
                 const dotsContainer = document.getElementById('audio-studio-dots');
-                dotsContainer.innerHTML = st.challenges.map((c, idx) => {
-                    const isSolved = !!this.state.audioSolved[c.id];
-                    const isCurrent = idx === this.audioStudio.challengeIndex;
-                    return `
-                        <button onclick="app.selectAudioStage(${st.stage}, ${idx})" title="Aller au Défi Audio ${idx + 1}"
-                            class="w-7 h-7 rounded-lg text-xs font-bold transition flex items-center justify-center border ${
-                                isCurrent
-                                    ? 'bg-rose-500 text-white border-rose-400 shadow scale-105'
-                                    : isSolved
-                                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30 hover:bg-emerald-500/30'
-                                        : 'bg-white/10 text-slate-300 border-white/10 hover:bg-white/20'
-                            }">
-                            ${isSolved ? '<i class="fa-solid fa-check text-[10px]"></i>' : idx + 1}
-                        </button>
-                    `;
-                }).join('');
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = st.challenges.map((c, idx) => {
+                        const isSolved = !!this.state.audioSolved[c.id];
+                        const isCurrent = idx === this.audioStudio.challengeIndex;
+                        return `
+                            <button onclick="app.selectAudioStage(${st.stage}, ${idx})" title="Aller au Défi ${idx + 1}"
+                                class="w-6 h-6 rounded-md text-[11px] font-bold transition flex items-center justify-center border ${
+                                    isCurrent
+                                        ? 'bg-rose-500 text-white border-rose-400 shadow scale-105'
+                                        : isSolved
+                                            ? 'bg-emerald-500/30 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/40'
+                                            : 'bg-white/10 text-slate-300 border-white/10 hover:bg-white/20'
+                                }">
+                                ${isSolved ? '<i class="fa-solid fa-check text-[9px]"></i>' : idx + 1}
+                            </button>
+                        `;
+                    }).join('');
+                }
 
                 // Réinitialiser les boîtes d'indices et de feedback
-                document.getElementById('audio-hint-partial-box').classList.add('hidden');
-                document.getElementById('audio-hint-full-box').classList.add('hidden');
-                document.getElementById('audio-feedback-box').classList.add('hidden');
-                document.getElementById('audio-action-footer').classList.remove('hidden');
+                const pBox = document.getElementById('audio-hint-partial-box');
+                if (pBox) pBox.classList.add('hidden');
+                const fBox = document.getElementById('audio-hint-full-box');
+                if (fBox) fBox.classList.add('hidden');
+                const fbBox = document.getElementById('audio-feedback-box');
+                if (fbBox) fbBox.classList.add('hidden');
+                const actFooter = document.getElementById('audio-action-footer');
+                if (actFooter) actFooter.classList.remove('hidden');
 
-                this.renderAudioStudioInteraction();
-
-                // Rendu de la grille des 6 Paliers Audio Cumulatifs avec leur ADN Lexical complet
-                stagesGrid.innerHTML = AUDIO_LAB_STAGES.map(stageObj => {
-                    const solvedInStage = stageObj.challenges.filter(c => !!this.state.audioSolved[c.id]).length;
-                    const totalInStage = stageObj.challenges.length;
-                    const percent = Math.round((solvedInStage / totalInStage) * 100);
-                    const isCurrentStage = stageObj.stage === this.audioStudio.stageNum;
-
-                    const reusedPills = stageObj.reusedWords.length === 0
-                        ? `<span class="px-2 py-0.5 rounded-lg text-[11px] bg-slate-100 text-slate-500 italic">Premier palier d'étalonnage</span>`
-                        : stageObj.reusedWords.map(w => `
-                            <span class="px-2 py-0.5 rounded-lg text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                                ♻️ ${w}
-                            </span>
-                        `).join('');
-
-                    const newPills = stageObj.newWords.map(w => `
-                        <button onclick="app.speak('${w.replace(/'/g, "\\'")}')" title="Cliquer pour écouter ce nouveau mot"
-                            class="px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition flex items-center gap-1">
-                            <span>✨ ${w}</span>
-                            <i class="fa-solid fa-volume-low text-[9px] opacity-60"></i>
-                        </button>
-                    `).join('');
-
-                    return `
-                        <div class="bg-white rounded-2xl border-2 ${isCurrentStage ? 'border-rose-400 shadow-md' : 'border-slate-200 shadow-sm'} p-5 transition space-y-4">
-                            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                                <div class="space-y-1">
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${isCurrentStage ? 'bg-rose-500 text-white' : 'bg-indigo-50 text-indigo-700 border border-indigo-200'}">
-                                            ${stageObj.badge}
-                                        </span>
-                                        ${isCurrentStage ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800">En cours dans le Studio</span>` : ''}
-                                        ${percent === 100 ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800"><i class="fa-solid fa-check mr-1"></i>Palier Audio Validé</span>` : ''}
-                                    </div>
-                                    <h3 class="text-base sm:text-lg font-display font-bold text-slate-900">${stageObj.title}</h3>
-                                    <p class="text-xs sm:text-sm text-slate-600">${stageObj.subtitle}</p>
-                                </div>
-
-                                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-                                    <div class="w-full sm:w-40">
-                                        <div class="flex justify-between text-xs font-bold mb-1">
-                                            <span class="text-slate-500">Oreille validée</span>
-                                            <span class="text-indigo-600">${solvedInStage}/${totalInStage} (${percent}%)</span>
-                                        </div>
-                                        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                                            <div class="bg-gradient-to-r from-rose-500 to-indigo-600 h-full rounded-full transition-all" style="width: ${percent}%"></div>
-                                        </div>
-                                    </div>
-
-                                    <button onclick="app.selectAudioStage(${stageObj.stage}, 0)"
-                                        class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm ${
-                                            isCurrentStage
-                                                ? 'bg-rose-500 hover:bg-rose-600 text-white shadow'
-                                                : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm'
-                                        } transition flex items-center justify-center gap-2">
-                                        <i class="fa-solid fa-headphones"></i>
-                                        <span>${isCurrentStage ? 'Relancer le Palier ' + stageObj.stage : 'Entraîner le Palier ' + stageObj.stage}</span>
-                                    </button>
-                                </div>
+                // Remplir l'explication dans l'accordéon déroulant
+                const expContent = document.getElementById('audio-explanation-content');
+                if (expContent) {
+                    expContent.innerHTML = `
+                        <div class="space-y-2">
+                            <div>
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Traduction en français :</span>
+                                <p class="font-bold text-indigo-950 text-sm">${ch.fr}</p>
                             </div>
-
-                            <!-- ADN Lexical Cumulatif : Mots repris vs Mots ajoutés -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-slate-100 text-xs">
-                                <div class="bg-emerald-50/50 rounded-xl p-3 border border-emerald-100 space-y-1.5">
-                                    <div class="font-bold text-emerald-900 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-recycle text-emerald-600"></i>
-                                        <span>Mots repris des paliers précédents :</span>
-                                    </div>
-                                    <div class="flex flex-wrap gap-1">
-                                        ${reusedPills}
-                                    </div>
-                                </div>
-
-                                <div class="bg-amber-50/50 rounded-xl p-3 border border-amber-100 space-y-1.5">
-                                    <div class="font-bold text-amber-950 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-plus-circle text-amber-600"></i>
-                                        <span>Nouveaux mots ajoutés à ce palier (cliquez pour écouter) :</span>
-                                    </div>
-                                    <div class="flex flex-wrap gap-1.5">
-                                        ${newPills}
-                                    </div>
-                                </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Phrase en anglais :</span>
+                                <p class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                    <span>${ch.en}</span>
+                                    <button onclick="app.speak('${ch.en.replace(/'/g, "\\'")}')" class="text-indigo-600 hover:text-indigo-800 text-xs" title="Écouter"><i class="fa-solid fa-volume-high"></i></button>
+                                    ${ch.phonetic ? `<span class="text-xs font-normal text-slate-400 font-mono">${ch.phonetic}</span>` : ''}
+                                </p>
                             </div>
+                            ${ch.earTip ? `
+                            <div class="pt-2 border-t border-slate-200/60">
+                                <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wider block">💡 Astuce d'écoute & Liaisons :</span>
+                                <p class="text-slate-600 text-xs leading-relaxed">${ch.earTip}</p>
+                            </div>` : ''}
                         </div>
                     `;
-                }).join('');
+                }
+
+                this.renderAudioStudioInteraction();
             },
 
             renderAudioStudioInteraction() {
@@ -3124,8 +3170,6 @@
                 const words = ch.en.split(' ');
                 if (level === 'partial') {
                     this.audioStudio.hintPartialShown = true;
-                    const audioDetails = document.getElementById('audio-extra-details');
-                    if (audioDetails) audioDetails.open = true;
                     const partialBox = document.getElementById('audio-hint-partial-box');
                     const masked = words.map((w, idx) => {
                         if (words.length === 1) return w.charAt(0) + ' ' + '_ '.repeat(w.length - 1);
@@ -3670,10 +3714,6 @@
             },
 
             startStageSession(stageNum) {
-                if (!this.isStageUnlocked(stageNum)) {
-                    this.showToast(`🔒 Le Palier ${stageNum} est verrouillé. Terminez d'abord le Palier ${stageNum - 1} !`, 'amber');
-                    return;
-                }
                 const stageBricks = KNOWLEDGE_BRICKS.filter(b => b.stage === stageNum);
                 // Pour le Palier 10 (Grand Dialogue en 6 étapes), conserver l'ordre chronologique exact du scénario !
                 const ordered = stageNum === 10 || stageNum === 5
@@ -3797,8 +3837,6 @@
                 }
 
                 document.getElementById('hint-box').classList.add('hidden');
-                const extraDetails = document.getElementById('exercise-extra-details');
-                if (extraDetails) extraDetails.open = false;
                 document.getElementById('feedback-panel').classList.add('hidden');
                 document.getElementById('session-footer').classList.remove('hidden');
 
@@ -3845,7 +3883,7 @@
                             <span class="text-xs text-slate-400">Niveau SRS : ${this.state.srs[brick.id]?.box || 0}/5</span>
                         </div>
 
-                        <div class="bg-slate-50 rounded-2xl p-3.5 sm:p-5 border border-slate-200/80 space-y-1.5 sm:space-y-2">
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 space-y-2">
                             <div class="text-xs uppercase font-bold text-slate-400">Vous voulez exprimer cette idée en anglais naturel :</div>
                             <div class="text-xl sm:text-2xl font-display font-extrabold text-slate-900">« ${brick.fr} »</div>
                             <p class="text-xs text-rose-600 font-semibold">
@@ -3856,7 +3894,7 @@
                         <div class="grid grid-cols-1 gap-3" id="mc-options-grid">
                             ${rawOptions.map(opt => `
                                 <button onclick="app.selectFrenglishOption('${opt.id}')" data-option-id="${opt.id}"
-                                    class="mc-option-btn p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-slate-200 hover:border-indigo-400 bg-white text-left transition flex items-center justify-between group">
+                                    class="mc-option-btn p-4 rounded-2xl border-2 border-slate-200 hover:border-indigo-400 bg-white text-left transition flex items-center justify-between group">
                                     <div class="flex items-center gap-3">
                                         <div class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-indigo-100 text-slate-600 group-hover:text-indigo-700 font-bold text-xs flex items-center justify-center">
                                             ?
@@ -3881,9 +3919,9 @@
 
                 document.querySelectorAll('.mc-option-btn').forEach(btn => {
                     if (btn.dataset.optionId === optionId) {
-                        btn.className = 'mc-option-btn p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-indigo-600 bg-indigo-50/70 text-left transition flex items-center justify-between ring-2 ring-indigo-500/20';
+                        btn.className = 'mc-option-btn p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/70 text-left transition flex items-center justify-between ring-2 ring-indigo-500/20';
                     } else {
-                        btn.className = 'mc-option-btn p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-slate-200 hover:border-indigo-400 bg-white text-left transition flex items-center justify-between';
+                        btn.className = 'mc-option-btn p-4 rounded-2xl border-2 border-slate-200 hover:border-indigo-400 bg-white text-left transition flex items-center justify-between';
                     }
                 });
             },
@@ -3907,12 +3945,12 @@
                             <span class="text-xs text-slate-400">Niveau SRS : ${this.state.srs[brick.id]?.box || 0}/5</span>
                         </div>
 
-                        <div class="bg-slate-50 rounded-2xl p-3.5 sm:p-5 border border-slate-200/80 text-center space-y-1 sm:space-y-2">
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 text-center space-y-2">
                             <div class="text-xs uppercase font-semibold text-slate-400">Comment exprime-t-on cette brique en anglais ?</div>
                             <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">« ${brick.fr} »</div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3" id="mc-options-grid">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="mc-options-grid">
                             ${options.map(opt => `
                                 <button onclick="app.selectMCOption('${opt.id}', '${opt.en.replace(/'/g, "\\'")}')" data-option-id="${opt.id}"
                                     class="mc-option-btn p-4 rounded-2xl border-2 border-slate-200 hover:border-indigo-400 bg-white text-left transition flex items-center justify-between group">
@@ -4091,13 +4129,13 @@
                             </button>
                         </div>
 
-                        <div class="bg-slate-50 rounded-2xl p-3 sm:p-4 border border-slate-200/80 space-y-1">
+                        <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200/80 space-y-1">
                             <div class="text-xs font-semibold uppercase text-slate-400">Construisez cette phrase en anglais :</div>
                             <div class="text-lg sm:text-xl font-display font-extrabold text-slate-900">« ${brick.fr} »</div>
                         </div>
 
                         <!-- Zone de dépôt des briques assemblées -->
-                        <div class="min-h-[56px] sm:min-h-[72px] rounded-2xl border-2 border-dashed border-indigo-200 bg-indigo-50/30 p-2.5 sm:p-3.5 flex flex-wrap items-center gap-1.5 sm:gap-2" id="builder-dropzone">
+                        <div class="min-h-[76px] rounded-2xl border-2 border-dashed border-indigo-200 bg-indigo-50/30 p-3.5 flex flex-wrap items-center gap-2" id="builder-dropzone">
                             <span class="text-xs text-slate-400 italic select-none">Cliquez sur les briques ci-dessous dans l'ordre pour bâtir votre phrase...</span>
                         </div>
 
@@ -4248,11 +4286,6 @@
                 const frenglishNote = brick.frenglishExplanation ? `<br><span class="text-rose-800 font-medium">💡 Déclic FR/EN : ${brick.frenglishExplanation}</span>` : '';
                 hintText.innerHTML = `${brick.mnemonic}${frenglishNote}<br><span class="font-semibold text-indigo-700">Amorçage : "${brick.en.slice(0, Math.min(15, brick.en.length))}..."</span>`;
                 hintBox.classList.remove('hidden');
-                const extraDetails = document.getElementById('exercise-extra-details');
-                if (extraDetails) {
-                    extraDetails.open = true;
-                    extraDetails.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
                 this.playSoundEffect('click');
             },
 
@@ -4334,16 +4367,16 @@
                     : '';
 
                 if (isCorrect) {
-                    panel.className = 'border-t border-emerald-200 bg-emerald-50/90 p-3.5 sm:p-5 transition-all animate-pop';
-                    iconBox.className = 'w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-lg sm:text-xl shrink-0 shadow';
+                    panel.className = 'border-t border-emerald-200 bg-emerald-50/90 p-5 sm:p-6 transition-all animate-pop';
+                    iconBox.className = 'w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl shrink-0 shadow';
                     iconBox.innerHTML = '<i class="fa-solid fa-check"></i>';
                     title.className = 'font-display font-bold text-base sm:text-lg text-emerald-950';
                     title.textContent = 'Réflexe anglophone validé !';
                     explanation.className = 'text-xs sm:text-sm mt-1 text-emerald-900';
                     explanation.innerHTML = `<strong>${brick.en}</strong> (${brick.phonetic}) — <em>${brick.fr}</em><br><span class="opacity-85">${brick.mnemonic}</span>${frenglishDetail}`;
                 } else {
-                    panel.className = 'border-t border-rose-200 bg-rose-50/90 p-3.5 sm:p-5 transition-all animate-shake';
-                    iconBox.className = 'w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-rose-600 text-white flex items-center justify-center text-lg sm:text-xl shrink-0 shadow';
+                    panel.className = 'border-t border-rose-200 bg-rose-50/90 p-5 sm:p-6 transition-all animate-shake';
+                    iconBox.className = 'w-11 h-11 rounded-2xl bg-rose-600 text-white flex items-center justify-center text-xl shrink-0 shadow';
                     iconBox.innerHTML = '<i class="fa-solid fa-rotate"></i>';
                     title.className = 'font-display font-bold text-base sm:text-lg text-rose-950';
                     title.textContent = 'Attention au réflexe francophone !';
@@ -4378,9 +4411,6 @@
             confirmResetToCycle2() {
                 this.state.xp = 450;
                 this.state.simulatedHoursOffset = 0;
-                this.state.unlockAllStages = false;
-                this.state.cycleFilter = 'cycle2';
-                this.state.completedStages = { 1: true, 2: true, 3: true, 4: true, 5: true };
                 this.state.srs = {};
                 KNOWLEDGE_BRICKS.forEach(brick => {
                     if (brick.stage <= 5) {
@@ -4392,17 +4422,14 @@
                 this.saveState();
                 document.getElementById('reset-confirm-modal').classList.add('hidden');
                 this.renderAll();
-                this.showToast('Paliers 1–5 validés ✅ Palier 6 débloqué (Paliers 7–10 verrouillés)', 'emerald');
+                this.showToast('Paliers 1–5 conservés ✅ et Paliers 6–10 prêts à être explorés !', 'emerald');
             },
 
             confirmResetProgress() {
                 localStorage.removeItem('lingobrick_state_v2');
-                localStorage.removeItem('lingobrick_state_v1');
                 this.state.xp = 0;
                 this.state.simulatedHoursOffset = 0;
-                this.state.unlockAllStages = false;
-                this.state.cycleFilter = 'all';
-                this.state.completedStages = {};
+                this.state.declicQuizSolved = {};
                 this.state.srs = {};
                 KNOWLEDGE_BRICKS.forEach(brick => {
                     this.state.srs[brick.id] = { box: 0, lastReviewedHour: 0, dueHour: 0, streak: 0, seenCount: 0 };
@@ -4410,7 +4437,7 @@
                 this.saveState();
                 document.getElementById('reset-confirm-modal').classList.add('hidden');
                 this.renderAll();
-                this.showToast('Progression remise à zéro : démarrez au Palier 1', 'indigo');
+                this.showToast('Progression intégralement remise à zéro (Paliers 1 à 10)', 'indigo');
             },
 
             updateBrickSRS(brick, wasCorrect, confidence) {
@@ -4458,32 +4485,9 @@
                 const accuracy = total ? Math.round((this.session.correctCount / total) * 100) : 100;
                 const earnedXp = this.session.correctCount * 15;
 
-                // Validation du palier et déverrouillage automatique du palier suivant
-                let nextStageUnlocked = null;
-                if (this.session.mode === 'stage' && this.session.stage) {
-                    const currentStage = this.session.stage;
-                    if (!this.state.completedStages) this.state.completedStages = {};
-                    this.state.completedStages[currentStage] = true;
-                    if (currentStage < 10 && !this.isStageUnlocked(currentStage + 1)) {
-                        nextStageUnlocked = currentStage + 1;
-                    }
-                    this.saveState();
-                }
-
                 document.getElementById('modal-stat-accuracy').textContent = `${accuracy}%`;
                 document.getElementById('modal-stat-xp').textContent = `+${earnedXp} XP`;
                 document.getElementById('modal-stat-bricks').textContent = `${total}`;
-
-                const modalTitle = document.getElementById('modal-complete-title');
-                const modalSubtitle = document.getElementById('modal-complete-subtitle');
-
-                if (nextStageUnlocked) {
-                    if (modalTitle) modalTitle.innerHTML = `Palier ${this.session.stage} validé ! 🎉`;
-                    if (modalSubtitle) modalSubtitle.innerHTML = `Félicitations ! Vous avez déverrouillé le <strong>Palier ${nextStageUnlocked}</strong>.`;
-                    this.showToast(`🎉 Bravo ! Palier ${nextStageUnlocked} débloqué !`, 'emerald');
-                } else if (modalTitle) {
-                    modalTitle.innerHTML = `Palier consolidé !`;
-                }
 
                 const upgradedContainer = document.getElementById('modal-bricks-upgraded');
                 upgradedContainer.innerHTML = this.session.upgradedBricks.map(u => `
@@ -4560,33 +4564,5 @@
             app.init();
         };
     </script>
-
-    <!-- ================================================================= -->
-    <!-- BARRE DE NAVIGATION INFÉRIEURE MOBILE (TOUJOURS ACCESSIBLE)      -->
-    <!-- ================================================================= -->
-    <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 h-16 px-1 flex items-center justify-around shadow-[0_-3px_12px_rgba(0,0,0,0.06)]">
-        <button id="mobile-nav-parcours" onclick="app.switchTab('parcours')" class="flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-indigo-600 font-bold transition">
-            <i class="fa-solid fa-stairs text-base"></i>
-            <span class="text-[10px]">Parcours</span>
-        </button>
-        <button id="mobile-nav-audio" onclick="app.switchTab('audio')" class="flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 font-medium transition">
-            <i class="fa-solid fa-headphones-simple text-base"></i>
-            <span class="text-[10px]">Audio</span>
-        </button>
-        <button id="mobile-nav-declic" onclick="app.switchTab('declic')" class="flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 font-medium transition">
-            <i class="fa-solid fa-lightbulb text-base"></i>
-            <span class="text-[10px]">Déclics</span>
-        </button>
-        <button id="mobile-nav-cerveau" onclick="app.switchTab('cerveau')" class="flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 font-medium transition relative">
-            <i class="fa-solid fa-brain text-base"></i>
-            <span class="text-[10px]">Mémoire</span>
-            <span id="mobile-srs-badge-count" class="hidden absolute top-1 right-1/4 px-1.5 py-0.2 rounded-full text-[9px] bg-amber-500 text-white font-bold">0</span>
-        </button>
-        <button id="mobile-nav-echafaudage" onclick="app.switchTab('echafaudage')" class="flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 font-medium transition">
-            <i class="fa-solid fa-diagram-project text-base"></i>
-            <span class="text-[10px]">Arbre</span>
-        </button>
-    </nav>
-
 </body>
 </html>
